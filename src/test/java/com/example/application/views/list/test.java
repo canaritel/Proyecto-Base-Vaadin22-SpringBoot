@@ -39,21 +39,21 @@ public class test {
         System.out.println("Grabo los objetos Rol");
 
         repoPerson.save(
-                new Person("Oscar", "Dominguez", "emailoscar@.ya.com", LocalDate.of(1980, 10, 10), Person.Gender.HOMBRE,
+                new Person("Oscar", "Dominguez", "emailoscar@ya.com", LocalDate.of(1980, 10, 10), Person.Gender.HOMBRE,
                         roluser));
         System.out.println("Grabo Persona");
 
-        repoPerson.save(new Person("Dora", "Exploradora", "email2@.ya.com", LocalDate.of(1976, 3, 5), Gender.MUJER,
+        repoPerson.save(new Person("Dora", "Exploradora", "email2@ya.com", LocalDate.of(1976, 3, 5), Gender.MUJER,
                 roluser));
         repoPerson.save(
-                new Person("Miriam", "El Balcón", "email3@.ya.com", LocalDate.of(1996, 12, 21), Gender.MUJER, roluser));
-        repoPerson.save(new Person("Manuel", "Notearrimes", "email4@.ya.com", LocalDate.of(1998, 9, 12),
+                new Person("Miriam", "El Balcón", "email3@ya.com", LocalDate.of(1996, 12, 21), Gender.MUJER, roluser));
+        repoPerson.save(new Person("Manuel", "Notearrimes", "email4@ya.com", LocalDate.of(1998, 9, 12),
                 Gender.HOMBRE, roluser));
-        repoPerson.save(new Person("Noelia", "Zarazgo", "email5@.ya.com", LocalDate.of(1984, 8, 14), Gender.MUJER,
+        repoPerson.save(new Person("Noelia", "Zarazgo", "email5@ya.com", LocalDate.of(1984, 8, 14), Gender.MUJER,
                 roluser));
-        repoPerson.save(new Person("Cristial", "Miguel", "email6@.ya.com", LocalDate.of(1988, 1, 17), Gender.HOMBRE,
+        repoPerson.save(new Person("Cristial", "Miguel", "email6@ya.com", LocalDate.of(1988, 1, 17), Gender.HOMBRE,
                 roluser));
-        repoPerson.save(new Person("Pepe", "Pepito", "email7@.ya.com", LocalDate.of(1973, 10, 16), Gender.HOMBRE,
+        repoPerson.save(new Person("Pepe", "Pepito", "email7@ya.com", LocalDate.of(1973, 10, 16), Gender.HOMBRE,
                 roladmin));
         // fetch all persons
         System.out.println("\nfindAll() -- Mostrar todos:");
@@ -111,7 +111,16 @@ public class test {
             System.out.println(r);
         }
 
-        System.out.println("Borramos el campo Person que tiene el objeto Ficha");
+        System.out.println("Borramos el campo Person que tiene el email emailoscar@ya.com");
+        Person oPerson = new Person();
+        oPerson = repoPerson.findByEmail("emailoscar@ya.com");
+        repoPerson.deleteById(oPerson.getId());
+
+        // fetch all persons
+        System.out.println("\nfindAll() -- Mostramos todas las personas:");
+        for (Person p : repoPerson.findAll()) {
+            System.out.println(p);
+        }
 
     }
 

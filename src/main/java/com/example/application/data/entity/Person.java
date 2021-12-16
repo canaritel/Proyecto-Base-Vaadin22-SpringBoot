@@ -1,5 +1,6 @@
 package com.example.application.data.entity;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -179,6 +180,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return "{" + id + "}, " + gender + ", " + name + " " + surname + ", cumpleaños: " + birthDate;
+        String strDateFormat = "hh:mm:ss dd-MM-yyyy"; // El formato de fecha está especificado
+        SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+        return "{" + id + "}, " + gender + ", " + name + " " + surname + ", cumpleaños: " + objSDF.format(birthDate)
+                + " " + email
+                + " " + roles.getName();
     }
 }
