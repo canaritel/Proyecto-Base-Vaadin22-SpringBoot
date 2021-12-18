@@ -39,4 +39,11 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     @Query("Select new com.example.application.data.entity.PersonInfo(p.id, p.name) from Person p")
     List<PersonInfo> findAllNamesAndIds();
 
+    // En este caso hay una relación unidireccional ManyToMany entre Person y
+    // Projecto. Para poder cargar los Proyectos que tiene cada Persona debemos
+    // crear una Query. Al usar tipo de carga Lazy no tenemos los datos desde el
+    // objeto Person y debemos crear este tipo de Query
+    @Query("Select distinct p from Person p JOIN FETCH p.projectos")
+    List<Person> findByPersonAndProjectos();
+
 }

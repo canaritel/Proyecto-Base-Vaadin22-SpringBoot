@@ -1,21 +1,15 @@
 package com.example.application.data.entity;
 
-import java.util.Objects;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Rol {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Rol extends AbstractEntity {
 
     @NotEmpty
     private String name;
+
+    /* ** Creamos constructor ** */
 
     public Rol() {
     }
@@ -24,13 +18,7 @@ public class Rol {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /* ** Creamos constructor ** */
 
     public String getName() {
         return name;
@@ -41,25 +29,8 @@ public class Rol {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Rol other = (Rol) obj;
-        return Objects.equals(id, other.id);
-    }
-
-    @Override
     public String toString() {
-        return "Rol [id=" + id + ", name=" + name + "]";
+        return "Rol [id=" + this.getId() + ", name=" + name + "]";
     }
 
 }

@@ -3,12 +3,16 @@ package com.example.application.views.list;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.example.application.data.entity.Person;
-import com.example.application.data.entity.PersonInfo;
 import com.example.application.data.entity.Person.Gender;
+import com.example.application.data.entity.PersonInfo;
+import com.example.application.data.entity.Projecto;
 import com.example.application.data.entity.Rol;
 import com.example.application.data.service.implement.PersonServiceImplement;
+import com.example.application.data.service.implement.ProjectoServiceImplement;
 import com.example.application.data.service.implement.RolServiceImplement;
 
 import org.junit.Test;
@@ -27,6 +31,9 @@ public class test {
     @Autowired
     private RolServiceImplement repoRol;
 
+    @Autowired
+    private ProjectoServiceImplement repoProjecto;
+
     @Test
     public void probando() {
         System.out.println("Hola Test");
@@ -38,9 +45,23 @@ public class test {
         roluser = repoRol.save(roluser); // grabo el objeto user
         System.out.println("Grabo los objetos Rol");
 
+        Projecto projecto1 = new Projecto("Proyecto1");
+        Projecto projecto2 = new Projecto("Proyecto2");
+        Projecto projecto3 = new Projecto("Proyecto3");
+        System.out.println("Grabo los objetos Projecto");
+        repoProjecto.save(projecto1);
+        repoProjecto.save(projecto2);
+        repoProjecto.save(projecto3);
+        System.out.println("Grabo los objetos Projecto");
+
+        Set<Projecto> proyectoList = new HashSet<>();
+
+        // proyectoList.clear(); // borro el List
+        proyectoList.add(projecto1);
+
         repoPerson.save(
                 new Person("Oscar", "Dominguez", "emailoscar@ya.com", LocalDate.of(1980, 10, 10), Person.Gender.HOMBRE,
-                        roluser));
+                        roluser, proyectoList));
         System.out.println("Grabo Persona");
 
         repoPerson.save(new Person("Dora", "Exploradora", "email2@ya.com", LocalDate.of(1976, 3, 5), Gender.MUJER,
@@ -53,8 +74,15 @@ public class test {
                 roluser));
         repoPerson.save(new Person("Cristial", "Miguel", "email6@ya.com", LocalDate.of(1988, 1, 17), Gender.HOMBRE,
                 roluser));
+
+        proyectoList.clear(); // borro el List
+        proyectoList.add(projecto1);
+        proyectoList.add(projecto2);
+        proyectoList.add(projecto3);
+
         repoPerson.save(new Person("Pepe", "Pepito", "email7@ya.com", LocalDate.of(1973, 10, 16), Gender.HOMBRE,
-                roladmin));
+                roladmin, proyectoList));
+
         // fetch all persons
         System.out.println("\nfindAll() -- Mostrar todos:");
         for (Person p : repoPerson.findAll()) {
@@ -118,8 +146,46 @@ public class test {
 
         // fetch all persons
         System.out.println("\nfindAll() -- Mostramos todas las personas:");
+
+        // Esta es la forma para una carga EAGER a través de una QUERY en donde si
+        // mostramos los datos del proyecto
+        for (Person p : repoPerson.findByPersonAndProjectos()) {
+            System.out.println(p + " " + p.getProjectos().toString());
+        }
+        // Esta es la forma para una carga Lazy donde no podemos mostrar los datos del
+        // Proyecto
+        System.out.println("-------------------------");
         for (Person p : repoPerson.findAll()) {
             System.out.println(p);
+            // System.out.println(p + " " + p.getProjectos().toString());
+        }
+
+        System.out.println("-------------------------");
+
+        System.out.println("Borramos el campo Person que tiene el email email2@ya.com");
+        oPerson = repoPerson.findByEmail("email2@ya.com");
+        repoPerson.deleteById(oPerson.getId());
+
+        System.out.println("-------------------------");
+
+        // Esta es la forma para una carga EAGER a través de una QUERY en donde si
+        // mostramos los datos del proyecto
+        for (Person p : repoPerson.findByPersonAndProjectos()) {
+            System.out.println(p + " " + p.getProjectos().toString());
+        }
+
+        System.out.println("-------------------------");
+
+        System.out.println("Borramos el campo Person que tiene el email email7@ya.com");
+        oPerson = repoPerson.findByEmail("email7@ya.com");
+        repoPerson.deleteById(oPerson.getId());
+
+        System.out.println("-------------------------");
+
+        // Esta es la forma para una carga EAGER a través de una QUERY en donde si
+        // mostramos los datos del proyecto
+        for (Person p : repoPerson.findByPersonAndProjectos()) {
+            System.out.println(p + " " + p.getProjectos().toString());
         }
 
     }

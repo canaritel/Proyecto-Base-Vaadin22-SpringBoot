@@ -4,13 +4,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -18,15 +20,11 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Person {
+public class Person extends AbstractEntity {
 
     public enum Gender {
         HOMBRE, MUJER
     };
-
-    @Id
-    @GeneratedValue
-    private Integer id;
 
     @Size(min = 4, max = 50, message = "Debe tener entre 4 y 50 carácteres")
     @NotEmpty // Más info: https://docs.oracle.com/javaee/7/tutorial/bean-validation001.htm ||
@@ -53,18 +51,32 @@ public class Person {
     // *********** Recomendado hacer unicamente relaciones unidireccionables por
     // ************ mejora del mantenimiento BD *********
 
+    /* ************************************************************* */
+    // Creamos la relación ManyToOne unidireccional hacia la entidad Rol
     @JoinColumn(name = "FK_ROL") // creará esta FK
     @ManyToOne(optional = false, targetEntity = Rol.class) // no puede ser null
-    private Rol roles;
-    // Debemos crear los métodos Get y Set (ver más abajo)
+    private Rol roles; // Debemos crear los métodos Get y Set (ver más abajo)
 
-    // Creamos la relación OneToOne unidireccional hacia la entidad Ficha
-    // @JoinColumn(name = "FK_FICHA")
+    /* ************************************************************* */
+    // Creamos la relación ManyToMany unidireccional hacia la entidad Company
+    @JoinTable(name = "rel_person _projecto", // nombre a la relación de la tabla intermedia
+            joinColumns = @JoinColumn(name = "FK_PERSON"), // primer FK
+            inverseJoinColumns = @JoinColumn(name = "FK_PROJECTO")) // segundo FK
+    @ManyToMany(targetEntity = Projecto.class, //
+            fetch = FetchType.LAZY) // Many siempre de tipo Lazy, carga perozosa
+    private Set<Projecto> projectos = new HashSet<>();
+    // (fetch=FetchType.EAGER) penaliza en velocidad, ya que cargará todo el objeto.
+    // Recomendable usar Lazy para menor carga de datos y dentro del Repositorio
+    // crear un método de búsqueda con esa función.
+    /* ************************************************************* */
+
+    // Creamos la relación OneToOne unidireccional hacia la entidad deseada
+    // @JoinColumn(name = "FK_ENTIDAD")
     // https://www.adictosaltrabajo.com/2020/04/02/hibernate-onetoone-onetomany-manytoone-y-manytomany/
-    // @OneToMany(targetEntity = Ficha.class, cascade = CascadeType.ALL,
+    // @OneToMany(targetEntity = Entidad.class, cascade = CascadeType.ALL,
     // orphanRemoval = true)
 
-    /* ************************************ */
+    /* ************************************************************* */
 
     public Person() {
     }
@@ -95,6 +107,20 @@ public class Person {
         this.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         this.gender = gender;
         this.roles = roles;
+    }
+
+    public Person(String name, String surname, String email, LocalDate birthDate, Gender gender, Rol roles,
+            Set<Projecto> projectos) {
+        // if (this.projectos == null) {
+        // this.projectos = new HashSet<>();
+        // }
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        this.gender = gender;
+        this.roles = roles;
+        this.projectos = projectos;
     }
 
     public String getName() {
@@ -145,14 +171,6 @@ public class Person {
         this.gender = gender;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Rol getRoles() {
         return roles;
     }
@@ -161,29 +179,33 @@ public class Person {
         this.roles = roles;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    /*
+     * public List<Projecto> getProjectos() {
+     * return this.projectos;
+     * }
+     * 
+     * public void setProjectos(List<Projecto> projectos) {
+     * this.projectos = projectos;
+     * }
+     */
+
+    public Set<Projecto> getProjectos() {
+        return projectos;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Person other = (Person) obj;
-        return Objects.equals(id, other.id);
+    public void setProjectos(Set<Projecto> projectos) {
+        this.projectos = projectos;
     }
 
     @Override
     public String toString() {
         String strDateFormat = "hh:mm:ss dd-MM-yyyy"; // El formato de fecha está especificado
         SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
-        return "{" + id + "}, " + gender + ", " + name + " " + surname + ", cumpleaños: " + objSDF.format(birthDate)
+        return "{" + this.getId() + "}, " + gender + ", " + name + " " + surname + ", cumpleaños: "
+                + objSDF.format(birthDate)
                 + " " + email
                 + " " + roles.getName();
+        // + " " + this.getProjectos().toString(); // esto daría error al no cargar el
+        // objeto
     }
 }

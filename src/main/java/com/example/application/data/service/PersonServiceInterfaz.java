@@ -32,4 +32,6 @@ public interface PersonServiceInterfaz {
 
     public List<PersonInfo> findAllPersonInfoByGender(Person.Gender g);
 
+    public List<Person> findByPersonAndProjectos();
+
 }

@@ -93,9 +93,14 @@ public class PersonServiceImplement implements PersonServiceInterfaz {
     public Person findByEmail(String email) {
         // Al ser Projecto un List cargado en modo Lazy debemos traernos el objeto
         // Cuando sea un ManyToMany o un OneToMany
-        Person oUser = personRepository.findByEmail(email);
+        // Person oUser = personRepository.findByEmail(email);
         // oUser.getEmail().size(); // este método obliga a traerse a todo el objeto
         return personRepository.findByEmail(email); // ya podemos imprimir Projecto
+    }
+
+    @Override
+    public List<Person> findByPersonAndProjectos() {
+        return personRepository.findByPersonAndProjectos();
     }
 
 }

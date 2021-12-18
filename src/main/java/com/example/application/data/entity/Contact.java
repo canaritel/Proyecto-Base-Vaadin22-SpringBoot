@@ -1,22 +1,14 @@
 package com.example.application.data.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-public class Contact {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Contact extends AbstractEntity {
 
     @NotEmpty // Más info: https://docs.oracle.com/javaee/7/tutorial/bean-validation001.htm ||
               // https://www.baeldung.com/javax-validation
@@ -28,7 +20,6 @@ public class Contact {
     @ManyToOne
     @JoinColumn(name = "company_id")
     @NotNull
-    @JsonIgnoreProperties({ "employees" })
     private Company company;
 
     @NotNull
@@ -45,14 +36,6 @@ public class Contact {
     }
 
     /* ** Creamos getters y setters ** */
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
