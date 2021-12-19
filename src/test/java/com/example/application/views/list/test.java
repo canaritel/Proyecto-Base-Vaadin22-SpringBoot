@@ -36,6 +36,7 @@ public class test {
 
     @Test
     public void probando() {
+        long inicio = System.currentTimeMillis();
         System.out.println("Hola Test");
 
         Rol roladmin = new Rol("ADMIN");
@@ -190,6 +191,10 @@ public class test {
 
         Person person = repoPerson.findByEmail("email7@ya.com");
         System.out.println(person.toString() + " " + person.getProjectos().toString());
+
+        long fin = System.currentTimeMillis();
+        double tiempo = (double) ((fin - inicio) / 1000);
+        System.out.println(tiempo + " segundos");
 
     }
 
