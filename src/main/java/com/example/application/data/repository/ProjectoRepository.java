@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProjectoRepository extends JpaRepository<Projecto, Integer> {
 
-    Projecto findByName(String name); // creamos un nuevo método de búsqueda
-
 }

@@ -176,17 +176,22 @@ public class test {
 
         System.out.println("-------------------------");
 
-        System.out.println("Borramos el campo Person que tiene el email email7@ya.com");
-        oPerson = repoPerson.findByEmail("email7@ya.com");
+        System.out.println("Borramos el campo Person que tiene el email email6@ya.com");
+        oPerson = repoPerson.findByEmail("email6@ya.com");
         repoPerson.deleteById(oPerson.getId());
 
-        System.out.println("-------------------------");
+        System.out.println("----------- MOSTRAMOS TODOS LOS PERSONS Y PROYECTOS --------------");
 
         // Esta es la forma para una carga EAGER a través de una QUERY en donde si
         // mostramos los datos del proyecto
         for (Person p : repoPerson.findByPersonAndProjectos()) {
             System.out.println(p + " " + p.getProjectos().toString());
         }
+
+        System.out.println("----------- MOSTRAMOS PERSONS Y PROYECTOS --------------");
+
+        Person person = repoPerson.findByEmail("email7@ya.com");
+        System.out.println(person.toString() + " " + person.getProjectos().toString());
 
     }
 
