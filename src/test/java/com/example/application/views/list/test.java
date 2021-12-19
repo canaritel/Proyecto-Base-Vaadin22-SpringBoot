@@ -157,7 +157,6 @@ public class test {
         System.out.println("-------------------------");
         for (Person p : repoPerson.findAll()) {
             System.out.println(p);
-            // System.out.println(p + " " + p.getProjectos().toString());
         }
 
         System.out.println("-------------------------");
@@ -168,10 +167,9 @@ public class test {
 
         System.out.println("-------------------------");
 
-        // Esta es la forma para una carga EAGER a través de una QUERY en donde si
-        // mostramos los datos del proyecto
-        for (Person p : repoPerson.findByPersonAndProjectos()) {
-            System.out.println(p + " " + p.getProjectos().toString());
+        for (Person p : repoPerson.findAll()) {
+            System.out.println(p);
+
         }
 
         System.out.println("-------------------------");
