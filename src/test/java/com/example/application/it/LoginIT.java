@@ -1,7 +1,7 @@
 package com.example.application.it;
 
 import com.example.application.it.elements.LoginViewElement;
-import com.vaadin.flow.component.login.testbench.LoginFormElement;
+
 import org.junit.Assert;
 import org.junit.Test;
 
