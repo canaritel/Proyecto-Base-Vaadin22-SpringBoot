@@ -22,7 +22,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 		login.setAction("login");
 
-		add(new H1("Vaadin CRM"), login);
+		add(new H1("Cuponcito.com"), login);
 	}
 
 	@Override

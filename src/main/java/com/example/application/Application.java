@@ -27,7 +27,8 @@ import org.vaadin.artur.helpers.LaunchUtil;
 @EnableAutoConfiguration
 @NpmPackage(value = "lumo-css-framework", version = "^4.0.10")
 @Theme("flowcrmtutorial")
-@PWA(name = "VaadinCRM", shortName = "CRM", offlinePath = "offline.html", offlineResources = { "./images/offline.png" })
+@PWA(name = "Cuponcito.com", shortName = "Coupon", offlinePath = "offline.html", offlineResources = {
+        "./images/offline.png" }) // la carpeta de las imágenes está en META-INFs
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
 
     /*

@@ -36,7 +36,6 @@ public class Person extends AbstractEntity {
     private String surname;
 
     @Email(message = "Email no valido")
-    @NotEmpty
     @Column(unique = true) // otra forma de validación
     private String email;
 
@@ -79,49 +78,62 @@ public class Person extends AbstractEntity {
     /* ************************************************************* */
 
     public Person() {
-    }
-
-    public Person(String name, Gender gender) {
-        this.name = name;
         this.birthDate = new Date();
-        this.gender = gender;
     }
 
-    public Person(String name, LocalDate birthDate, Gender gender) {
-        this.name = name;
-        this.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.gender = gender;
+    // ---- CAMPOS OBLIGATORIOS DONDE CREO EL PRIMER CONSTRUCTOR BUILDER ------
+
+    public static Builder builder(String name, Rol roles) {
+        return new Builder(name, roles);
     }
 
-    public Person(String name, String surname, LocalDate birthDate, Gender gender) {
-        this.name = name;
-        this.surname = surname;
-        this.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.gender = gender;
-    }
+    // ----------- CONSTRUCTORES SIN MÉTODO BUILDER ---------------------
 
-    public Person(String name, String surname, String email, LocalDate birthDate, Gender gender, Rol roles) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.gender = gender;
-        this.roles = roles;
-    }
+    // public Person(String name, Rol roles) {
+    // this.name = name;
+    // this.birthDate = new Date();
+    // this.roles = roles;
+    // }
 
-    public Person(String name, String surname, String email, LocalDate birthDate, Gender gender, Rol roles,
-            Set<Projecto> projectos) {
-        // if (this.projectos == null) {
-        // this.projectos = new HashSet<>();
-        // }
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.gender = gender;
-        this.roles = roles;
-        this.projectos = projectos;
-    }
+    // public Person(String name, Rol roles, Gender gender) {
+    // this.name = name;
+    // this.birthDate = new Date();
+    // this.gender = gender;
+    // this.roles = roles;
+    // }
+
+    // public Person(String name, String surname, LocalDate birthDate, Gender
+    // gender) {
+    // this.name = name;
+    // this.surname = surname;
+    // this.birthDate =
+    // Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    // this.gender = gender;
+    // }
+
+    // public Person(String name, String surname, String email, LocalDate birthDate,
+    // Gender gender, Rol roles) {
+    // this.name = name;
+    // this.surname = surname;
+    // this.email = email;
+    // this.birthDate =
+    // Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    // this.gender = gender;
+    // this.roles = roles;
+    // }
+
+    // public Person(String name, String surname, String email, LocalDate birthDate,
+    // Gender gender, Rol roles,
+    // Set<Projecto> projectos) {
+    // this.name = name;
+    // this.surname = surname;
+    // this.email = email;
+    // this.birthDate =
+    // Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    // this.gender = gender;
+    // this.roles = roles;
+    // this.projectos = projectos;
+    // }
 
     public String getName() {
         return name;
@@ -179,21 +191,11 @@ public class Person extends AbstractEntity {
         this.roles = roles;
     }
 
-    /*
-     * public List<Projecto> getProjectos() {
-     * return this.projectos;
-     * }
-     * 
-     * public void setProjectos(List<Projecto> projectos) {
-     * this.projectos = projectos;
-     * }
-     */
-
-    public Set<Projecto> getProjectos() {
+    public synchronized Set<Projecto> getProjectos() {
         return projectos;
     }
 
-    public void setProjectos(Set<Projecto> projectos) {
+    public synchronized void setProjectos(Set<Projecto> projectos) {
         this.projectos = projectos;
     }
 
@@ -208,4 +210,55 @@ public class Person extends AbstractEntity {
         // + " " + this.getProjectos().toString(); // esto daría error al no cargar el
         // objeto
     }
+
+    // ------------- CREAMOS PATRÓN BUILDER -----------------
+
+    public static class Builder {
+
+        private Person person;
+
+        // Este constructor indica los parámetros principales
+        private Builder(String name, Rol roles) {
+            this.person = new Person();
+            this.person.name = name;
+            this.person.roles = roles;
+        }
+
+        // El resto de métodos son añadidos al Builder
+        public Builder surname(String surname) {
+            this.person.surname = surname;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.person.email = email;
+            return this;
+        }
+
+        public Builder telefono(String telefono) {
+            this.person.telefono = telefono;
+            return this;
+        }
+
+        public Builder birthDate(LocalDate birthDate) {
+            this.person.birthDate = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            return this;
+        }
+
+        public Builder gender(Gender gender) {
+            this.person.gender = gender;
+            return this;
+        }
+
+        public Builder projecto(Set<Projecto> projectos) {
+            this.person.projectos = projectos;
+            return this;
+        }
+
+        public Person build() {
+            return this.person;
+        }
+
+    }
+
 }

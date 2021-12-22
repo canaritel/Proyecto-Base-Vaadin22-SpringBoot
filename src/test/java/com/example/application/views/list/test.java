@@ -56,33 +56,62 @@ public class test {
         System.out.println("Grabo los objetos Projecto");
 
         Set<Projecto> proyectoList = new HashSet<>();
+        proyectoList.add(projecto1); // añado solo 1 proyecto al Set
 
-        // proyectoList.clear(); // borro el List
-        proyectoList.add(projecto1);
+        repoPerson.save(Person.builder("Martín", roladmin)
+                .surname("Director")
+                .build());
 
-        repoPerson.save(
-                new Person("Oscar", "Dominguez", "emailoscar@ya.com", LocalDate.of(1980, 10, 10), Person.Gender.HOMBRE,
-                        roluser, proyectoList));
-        System.out.println("Grabo Persona");
+        System.out.println("Grabo Persona tipo Admin");
 
-        repoPerson.save(new Person("Dora", "Exploradora", "email2@ya.com", LocalDate.of(1976, 3, 5), Gender.MUJER,
-                roluser));
-        repoPerson.save(
-                new Person("Miriam", "El Balcón", "email3@ya.com", LocalDate.of(1996, 12, 21), Gender.MUJER, roluser));
-        repoPerson.save(new Person("Manuel", "Notearrimes", "email4@ya.com", LocalDate.of(1998, 9, 12),
-                Gender.HOMBRE, roluser));
-        repoPerson.save(new Person("Noelia", "Zarazgo", "email5@ya.com", LocalDate.of(1984, 8, 14), Gender.MUJER,
-                roluser));
-        repoPerson.save(new Person("Cristial", "Miguel", "email6@ya.com", LocalDate.of(1988, 1, 17), Gender.HOMBRE,
-                roluser));
+        repoPerson.save(Person.builder("Oscar", roluser)
+                .surname("Dominguez").email("emailoscar@ya.com")
+                .birthDate(LocalDate.of(1990, 10, 10))
+                .gender(Gender.HOMBRE)
+                .projecto(proyectoList) // le añado proyecto
+                .build());
 
-        proyectoList.clear(); // borro el List
+        repoPerson.save(Person.builder("Dora", roluser)
+                .surname("Exploradora").email("email2@ya.com")
+                .birthDate(LocalDate.of(1976, 3, 5))
+                .gender(Gender.MUJER)
+                .build());
+
+        repoPerson.save(Person.builder("Miriam", roluser)
+                .surname("El Balcón").email("email3@ya.com")
+                .birthDate(LocalDate.of(1996, 12, 21))
+                .gender(Gender.MUJER)
+                .build());
+
+        repoPerson.save(Person.builder("Manuel", roluser)
+                .surname("No Te Arrimes").email("email4@ya.com")
+                .birthDate(LocalDate.of(1998, 9, 12))
+                .gender(Gender.HOMBRE)
+                .build());
+
+        repoPerson.save(Person.builder("Noelia", roluser)
+                .surname("De Zaracho").email("email5@ya.com")
+                .birthDate(LocalDate.of(1984, 8, 14))
+                .gender(Gender.MUJER)
+                .build());
+
+        repoPerson.save(Person.builder("Cristian", roluser)
+                .surname("De Bizad").email("email6@ya.com")
+                .birthDate(LocalDate.of(1988, 1, 17))
+                .gender(Gender.HOMBRE)
+                .build());
+
+        proyectoList.clear(); // borro el List y añado 3 proyectos
         proyectoList.add(projecto1);
         proyectoList.add(projecto2);
         proyectoList.add(projecto3);
 
-        repoPerson.save(new Person("Pepe", "Pepito", "email7@ya.com", LocalDate.of(1973, 10, 16), Gender.HOMBRE,
-                roladmin, proyectoList));
+        repoPerson.save(Person.builder("Antonio", roluser)
+                .surname("González").email("email7@ya.com")
+                .birthDate(LocalDate.of(1973, 10, 16))
+                .gender(Gender.HOMBRE)
+                .projecto(proyectoList) // le añado proyectos
+                .build());
 
         // fetch all persons
         System.out.println("\nfindAll() -- Mostrar todos:");
@@ -140,7 +169,7 @@ public class test {
             System.out.println(r);
         }
 
-        System.out.println("Borramos el campo Person que tiene el email emailoscar@ya.com");
+        System.out.println("\nBorramos el campo Person que tiene el email emailoscar@ya.com");
         Person oPerson = new Person();
         oPerson = repoPerson.findByEmail("emailoscar@ya.com");
         repoPerson.deleteById(oPerson.getId());
@@ -170,7 +199,6 @@ public class test {
 
         for (Person p : repoPerson.findAll()) {
             System.out.println(p);
-
         }
 
         System.out.println("-------------------------");

@@ -5,7 +5,7 @@ import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -24,8 +24,8 @@ public class MainLayout extends AppLayout {
 
     private void createHeader() {
         // Aparece cuando ya nos logeamos
-        H1 logo = new H1("Vaadin CRM");
-        logo.addClassNames("text-2", "m-m"); // tamaño letra
+        H2 logo = new H2("Cuponcito.com");
+        logo.addClassNames("text-1", "m-m"); // tamaño letra
 
         // Cerramos cuando se pulsa en Salir
         Button logout = new Button("Salir", e -> securityService.logout());
