@@ -6,6 +6,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -24,13 +25,15 @@ public class MainLayout extends AppLayout {
 
     private void createHeader() {
         // Aparece cuando ya nos logeamos
-        H2 logo = new H2("Cuponcito.com");
+        H2 logo = new H2("");
         logo.addClassNames("text-1", "m-m"); // tamaño letra
+        Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
+        imgLogo.setHeight("30px"); // ajustamos el tamaño de la imagen
 
         // Cerramos cuando se pulsa en Salir
         Button logout = new Button("Salir", e -> securityService.logout());
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, logout);
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, logo, logout);
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(logo);

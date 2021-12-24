@@ -1,0 +1,450 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 info pnpm": {
+    "message": "Using hooks from: D:\\VSCode JAVA\\flow-crm-tutorial-main\\pnpmfile.js",
+    "prefix": "D:\\VSCode JAVA\\flow-crm-tutorial-main"
+  },
+  "2 info pnpm": {
+    "message": "readPackage hook is declared. Manifests of dependencies might get overridden",
+    "prefix": "D:\\VSCode JAVA\\flow-crm-tutorial-main"
+  },
+  "3 debug pnpm:package-manifest": {
+    "initial": {
+      "dependencies": {
+        "@polymer/iron-icon": "3.0.1",
+        "@polymer/iron-list": "3.1.0",
+        "@polymer/polymer": "3.2.0",
+        "@vaadin/accordion": "22.0.2",
+        "@vaadin/app-layout": "22.0.2",
+        "@vaadin/avatar": "22.0.2",
+        "@vaadin/avatar-group": "22.0.2",
+        "@vaadin/board": "22.0.2",
+        "@vaadin/button": "22.0.2",
+        "@vaadin/charts": "22.0.2",
+        "@vaadin/checkbox": "22.0.2",
+        "@vaadin/checkbox-group": "22.0.2",
+        "@vaadin/combo-box": "22.0.2",
+        "@vaadin/common-frontend": "0.0.17",
+        "@vaadin/confirm-dialog": "22.0.2",
+        "@vaadin/context-menu": "22.0.2",
+        "@vaadin/cookie-consent": "22.0.2",
+        "@vaadin/crud": "22.0.2",
+        "@vaadin/custom-field": "22.0.2",
+        "@vaadin/date-picker": "22.0.2",
+        "@vaadin/date-time-picker": "22.0.2",
+        "@vaadin/details": "22.0.2",
+        "@vaadin/dialog": "22.0.2",
+        "@vaadin/email-field": "22.0.2",
+        "@vaadin/flow-frontend": "./target/flow-frontend",
+        "@vaadin/form": "0.0.15",
+        "@vaadin/form-layout": "22.0.2",
+        "@vaadin/fusion-frontend": "0.0.15",
+        "@vaadin/grid": "22.0.2",
+        "@vaadin/grid-pro": "22.0.2",
+        "@vaadin/horizontal-layout": "22.0.2",
+        "@vaadin/icon": "22.0.2",
+        "@vaadin/icons": "22.0.2",
+        "@vaadin/integer-field": "22.0.2",
+        "@vaadin/item": "22.0.2",
+        "@vaadin/list-box": "22.0.2",
+        "@vaadin/login": "22.0.2",
+        "@vaadin/menu-bar": "22.0.2",
+        "@vaadin/message-input": "22.0.2",
+        "@vaadin/message-list": "22.0.2",
+        "@vaadin/notification": "22.0.2",
+        "@vaadin/number-field": "22.0.2",
+        "@vaadin/password-field": "22.0.2",
+        "@vaadin/polymer-legacy-adapter": "22.0.2",
+        "@vaadin/progress-bar": "22.0.2",
+        "@vaadin/radio-group": "22.0.2",
+        "@vaadin/rich-text-editor": "22.0.2",
+        "@vaadin/router": "1.7.4",
+        "@vaadin/scroller": "22.0.2",
+        "@vaadin/select": "22.0.2",
+        "@vaadin/split-layout": "22.0.2",
+        "@vaadin/tabs": "22.0.2",
+        "@vaadin/text-area": "22.0.2",
+        "@vaadin/text-field": "22.0.2",
+        "@vaadin/time-picker": "22.0.2",
+        "@vaadin/upload": "22.0.2",
+        "@vaadin/vaadin-accordion": "22.0.2",
+        "@vaadin/vaadin-app-layout": "22.0.2",
+        "@vaadin/vaadin-avatar": "22.0.2",
+        "@vaadin/vaadin-board": "22.0.2",
+        "@vaadin/vaadin-button": "22.0.2",
+        "@vaadin/vaadin-charts": "22.0.2",
+        "@vaadin/vaadin-checkbox": "22.0.2",
+        "@vaadin/vaadin-combo-box": "22.0.2",
+        "@vaadin/vaadin-confirm-dialog": "22.0.2",
+        "@vaadin/vaadin-context-menu": "22.0.2",
+        "@vaadin/vaadin-cookie-consent": "22.0.2",
+        "@vaadin/vaadin-core-shrinkwrap": "22.0.2",
+        "@vaadin/vaadin-crud": "22.0.2",
+        "@vaadin/vaadin-custom-field": "22.0.2",
+        "@vaadin/vaadin-date-picker": "22.0.2",
+        "@vaadin/vaadin-date-time-picker": "22.0.2",
+        "@vaadin/vaadin-details": "22.0.2",
+        "@vaadin/vaadin-dialog": "22.0.2",
+        "@vaadin/vaadin-form-layout": "22.0.2",
+        "@vaadin/vaadin-grid": "22.0.2",
+        "@vaadin/vaadin-grid-pro": "22.0.2",
+        "@vaadin/vaadin-icon": "22.0.2",
+        "@vaadin/vaadin-icons": "22.0.2",
+        "@vaadin/vaadin-item": "22.0.2",
+        "@vaadin/vaadin-list-box": "22.0.2",
+        "@vaadin/vaadin-login": "22.0.2",
+        "@vaadin/vaadin-lumo-styles": "22.0.2",
+        "@vaadin/vaadin-material-styles": "22.0.2",
+        "@vaadin/vaadin-menu-bar": "22.0.2",
+        "@vaadin/vaadin-messages": "22.0.2",
+        "@vaadin/vaadin-notification": "22.0.2",
+        "@vaadin/vaadin-ordered-layout": "22.0.2",
+        "@vaadin/vaadin-progress-bar": "22.0.2",
+        "@vaadin/vaadin-radio-button": "22.0.2",
+        "@vaadin/vaadin-rich-text-editor": "22.0.2",
+        "@vaadin/vaadin-select": "22.0.2",
+        "@vaadin/vaadin-shrinkwrap": "22.0.2",
+        "@vaadin/vaadin-split-layout": "22.0.2",
+        "@vaadin/vaadin-tabs": "22.0.2",
+        "@vaadin/vaadin-text-field": "22.0.2",
+        "@vaadin/vaadin-themable-mixin": "22.0.2",
+        "@vaadin/vaadin-time-picker": "22.0.2",
+        "@vaadin/vaadin-upload": "22.0.2",
+        "@vaadin/vaadin-virtual-list": "22.0.2",
+        "@vaadin/vertical-layout": "22.0.2",
+        "@vaadin/virtual-list": "22.0.2",
+        "construct-style-sheets-polyfill": "3.0.4",
+        "date-fns": "2.23.0",
+        "lit": "2.0.0",
+        "lumo-css-framework": "^4.0.10"
+      },
+      "devDependencies": {
+        "@vaadin/application-theme-plugin": "./target/plugins/application-theme-plugin",
+        "@vaadin/build-status-plugin": "./target/plugins/build-status-plugin",
+        "@vaadin/theme-live-reload-plugin": "./target/plugins/theme-live-reload-plugin",
+        "@vaadin/theme-loader": "./target/plugins/theme-loader",
+        "chokidar": "^3.5.0",
+        "compression-webpack-plugin": "4.0.1",
+        "css-loader": "4.2.1",
+        "esbuild-loader": "2.15.1",
+        "extra-watch-webpack-plugin": "1.0.3",
+        "extract-loader": "5.1.0",
+        "file-loader": "6.2.0",
+        "fork-ts-checker-webpack-plugin": "6.2.1",
+        "glob": "7.1.6",
+        "html-webpack-plugin": "4.5.1",
+        "lit-css-loader": "0.1.0",
+        "loader-utils": "2.0.0",
+        "typescript": "4.4.3",
+        "webpack": "4.46.0",
+        "webpack-cli": "4.9.0",
+        "webpack-dev-server": "4.1.1",
+        "webpack-merge": "4.2.2",
+        "workbox-core": "6.4.2",
+        "workbox-precaching": "6.4.2",
+        "workbox-webpack-plugin": "6.4.2"
+      },
+      "license": "UNLICENSED",
+      "name": "no-name",
+      "vaadin": {
+        "dependencies": {
+          "@polymer/iron-icon": "3.0.1",
+          "@polymer/iron-list": "3.1.0",
+          "@polymer/polymer": "3.2.0",
+          "@vaadin/accordion": "22.0.2",
+          "@vaadin/app-layout": "22.0.2",
+          "@vaadin/avatar": "22.0.2",
+          "@vaadin/avatar-group": "22.0.2",
+          "@vaadin/board": "22.0.2",
+          "@vaadin/button": "22.0.2",
+          "@vaadin/charts": "22.0.2",
+          "@vaadin/checkbox": "22.0.2",
+          "@vaadin/checkbox-group": "22.0.2",
+          "@vaadin/combo-box": "22.0.2",
+          "@vaadin/common-frontend": "0.0.17",
+          "@vaadin/confirm-dialog": "22.0.2",
+          "@vaadin/context-menu": "22.0.2",
+          "@vaadin/cookie-consent": "22.0.2",
+          "@vaadin/crud": "22.0.2",
+          "@vaadin/custom-field": "22.0.2",
+          "@vaadin/date-picker": "22.0.2",
+          "@vaadin/date-time-picker": "22.0.2",
+          "@vaadin/details": "22.0.2",
+          "@vaadin/dialog": "22.0.2",
+          "@vaadin/email-field": "22.0.2",
+          "@vaadin/form": "0.0.15",
+          "@vaadin/form-layout": "22.0.2",
+          "@vaadin/fusion-frontend": "0.0.15",
+          "@vaadin/grid": "22.0.2",
+          "@vaadin/grid-pro": "22.0.2",
+          "@vaadin/horizontal-layout": "22.0.2",
+          "@vaadin/icon": "22.0.2",
+          "@vaadin/icons": "22.0.2",
+          "@vaadin/integer-field": "22.0.2",
+          "@vaadin/item": "22.0.2",
+          "@vaadin/list-box": "22.0.2",
+          "@vaadin/login": "22.0.2",
+          "@vaadin/menu-bar": "22.0.2",
+          "@vaadin/message-input": "22.0.2",
+          "@vaadin/message-list": "22.0.2",
+          "@vaadin/notification": "22.0.2",
+          "@vaadin/number-field": "22.0.2",
+          "@vaadin/password-field": "22.0.2",
+          "@vaadin/polymer-legacy-adapter": "22.0.2",
+          "@vaadin/progress-bar": "22.0.2",
+          "@vaadin/radio-group": "22.0.2",
+          "@vaadin/rich-text-editor": "22.0.2",
+          "@vaadin/router": "1.7.4",
+          "@vaadin/scroller": "22.0.2",
+          "@vaadin/select": "22.0.2",
+          "@vaadin/split-layout": "22.0.2",
+          "@vaadin/tabs": "22.0.2",
+          "@vaadin/text-area": "22.0.2",
+          "@vaadin/text-field": "22.0.2",
+          "@vaadin/time-picker": "22.0.2",
+          "@vaadin/upload": "22.0.2",
+          "@vaadin/vaadin-accordion": "22.0.2",
+          "@vaadin/vaadin-app-layout": "22.0.2",
+          "@vaadin/vaadin-avatar": "22.0.2",
+          "@vaadin/vaadin-board": "22.0.2",
+          "@vaadin/vaadin-button": "22.0.2",
+          "@vaadin/vaadin-charts": "22.0.2",
+          "@vaadin/vaadin-checkbox": "22.0.2",
+          "@vaadin/vaadin-combo-box": "22.0.2",
+          "@vaadin/vaadin-confirm-dialog": "22.0.2",
+          "@vaadin/vaadin-context-menu": "22.0.2",
+          "@vaadin/vaadin-cookie-consent": "22.0.2",
+          "@vaadin/vaadin-core-shrinkwrap": "22.0.2",
+          "@vaadin/vaadin-crud": "22.0.2",
+          "@vaadin/vaadin-custom-field": "22.0.2",
+          "@vaadin/vaadin-date-picker": "22.0.2",
+          "@vaadin/vaadin-date-time-picker": "22.0.2",
+          "@vaadin/vaadin-details": "22.0.2",
+          "@vaadin/vaadin-dialog": "22.0.2",
+          "@vaadin/vaadin-form-layout": "22.0.2",
+          "@vaadin/vaadin-grid": "22.0.2",
+          "@vaadin/vaadin-grid-pro": "22.0.2",
+          "@vaadin/vaadin-icon": "22.0.2",
+          "@vaadin/vaadin-icons": "22.0.2",
+          "@vaadin/vaadin-item": "22.0.2",
+          "@vaadin/vaadin-list-box": "22.0.2",
+          "@vaadin/vaadin-login": "22.0.2",
+          "@vaadin/vaadin-lumo-styles": "22.0.2",
+          "@vaadin/vaadin-material-styles": "22.0.2",
+          "@vaadin/vaadin-menu-bar": "22.0.2",
+          "@vaadin/vaadin-messages": "22.0.2",
+          "@vaadin/vaadin-notification": "22.0.2",
+          "@vaadin/vaadin-ordered-layout": "22.0.2",
+          "@vaadin/vaadin-progress-bar": "22.0.2",
+          "@vaadin/vaadin-radio-button": "22.0.2",
+          "@vaadin/vaadin-rich-text-editor": "22.0.2",
+          "@vaadin/vaadin-select": "22.0.2",
+          "@vaadin/vaadin-shrinkwrap": "22.0.2",
+          "@vaadin/vaadin-split-layout": "22.0.2",
+          "@vaadin/vaadin-tabs": "22.0.2",
+          "@vaadin/vaadin-text-field": "22.0.2",
+          "@vaadin/vaadin-themable-mixin": "22.0.2",
+          "@vaadin/vaadin-time-picker": "22.0.2",
+          "@vaadin/vaadin-upload": "22.0.2",
+          "@vaadin/vaadin-virtual-list": "22.0.2",
+          "@vaadin/vertical-layout": "22.0.2",
+          "@vaadin/virtual-list": "22.0.2",
+          "construct-style-sheets-polyfill": "3.0.4",
+          "date-fns": "2.23.0",
+          "lit": "2.0.0",
+          "lumo-css-framework": "^4.0.10"
+        },
+        "devDependencies": {
+          "chokidar": "^3.5.0",
+          "compression-webpack-plugin": "4.0.1",
+          "css-loader": "4.2.1",
+          "esbuild-loader": "2.15.1",
+          "extra-watch-webpack-plugin": "1.0.3",
+          "extract-loader": "5.1.0",
+          "file-loader": "6.2.0",
+          "fork-ts-checker-webpack-plugin": "6.2.1",
+          "glob": "7.1.6",
+          "html-webpack-plugin": "4.5.1",
+          "lit-css-loader": "0.1.0",
+          "loader-utils": "2.0.0",
+          "typescript": "4.4.3",
+          "webpack": "4.46.0",
+          "webpack-cli": "4.9.0",
+          "webpack-dev-server": "4.1.1",
+          "webpack-merge": "4.2.2",
+          "workbox-core": "6.4.2",
+          "workbox-precaching": "6.4.2",
+          "workbox-webpack-plugin": "6.4.2"
+        },
+        "hash": "e404d9534a3d9cc2a670bfbfa439abb5f70c6979b139147c888ba69720f37a58"
+      }
+    },
+    "prefix": "D:\\VSCode JAVA\\flow-crm-tutorial-main"
+  },
+  "4 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "D:\\.pnpm-store\\v3",
+    "virtualStoreDir": "D:\\VSCode JAVA\\flow-crm-tutorial-main\\node_modules\\.pnpm"
+  },
+  "5 debug pnpm:stage": {
+    "prefix": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "stage": "resolution_started"
+  },
+  "6 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/compression-webpack-plugin/4.0.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "compression-webpack-plugin",
+      "rawSpec": "4.0.1"
+    }
+  },
+  "7 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/compression-webpack-plugin/4.0.1",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "8 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/css-loader/4.2.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "css-loader",
+      "rawSpec": "4.2.1"
+    }
+  },
+  "9 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/css-loader/4.2.1",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "10 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/esbuild-loader/2.15.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "esbuild-loader",
+      "rawSpec": "2.15.1"
+    }
+  },
+  "11 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/esbuild-loader/2.15.1",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "12 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/extra-watch-webpack-plugin/1.0.3",
+    "wanted": {
+      "dependentId": ".",
+      "name": "extra-watch-webpack-plugin",
+      "rawSpec": "1.0.3"
+    }
+  },
+  "13 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/extra-watch-webpack-plugin/1.0.3",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "14 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/file-loader/6.2.0",
+    "wanted": {
+      "dependentId": ".",
+      "name": "file-loader",
+      "rawSpec": "6.2.0"
+    }
+  },
+  "15 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/file-loader/6.2.0",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "16 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/extract-loader/5.1.0",
+    "wanted": {
+      "dependentId": ".",
+      "name": "extract-loader",
+      "rawSpec": "5.1.0"
+    }
+  },
+  "17 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/extract-loader/5.1.0",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "18 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/glob/7.1.6",
+    "wanted": {
+      "dependentId": ".",
+      "name": "glob",
+      "rawSpec": "7.1.6"
+    }
+  },
+  "19 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/glob/7.1.6",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "20 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/lit-css-loader/0.1.0",
+    "wanted": {
+      "dependentId": ".",
+      "name": "lit-css-loader",
+      "rawSpec": "0.1.0"
+    }
+  },
+  "21 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/lit-css-loader/0.1.0",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "22 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/loader-utils/2.0.0",
+    "wanted": {
+      "dependentId": ".",
+      "name": "loader-utils",
+      "rawSpec": "2.0.0"
+    }
+  },
+  "23 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/loader-utils/2.0.0",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "24 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/fork-ts-checker-webpack-plugin/6.2.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "fork-ts-checker-webpack-plugin",
+      "rawSpec": "6.2.1"
+    }
+  },
+  "25 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/fork-ts-checker-webpack-plugin/6.2.1",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "26 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/html-webpack-plugin/4.5.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "html-webpack-plugin",
+      "rawSpec": "4.5.1"
+    }
+  },
+  "27 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/html-webpack-plugin/4.5.1",
+    "requester": "D:\\VSCode JAVA\\flow-crm-tutorial-main",
+    "status": "resolved"
+  },
+  "28 error pnpm": {
+    "message": {
+      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+      "pkgsStack": []
+    },
+    "err": {
+      "name": "Error",
+      "message": "No package.json (or package.yaml, or package.json5) was found in \"D:\\VSCode JAVA\\flow-crm-tutorial-main\\target\\plugins\\application-theme-plugin\".",
+      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+      "stack": "Error: No package.json (or package.yaml, or package.json5) was found in \"D:\\VSCode JAVA\\flow-crm-tutorial-main\\target\\plugins\\application-theme-plugin\".\n    at readProjectManifest (C:\\Users\\telev\\AppData\\Roaming\\npm-cache\\_npx\\3904\\node_modules\\pnpm\\dist\\pnpm.js:43174:11)\n    at async Object.readProjectManifestOnly (C:\\Users\\telev\\AppData\\Roaming\\npm-cache\\_npx\\3904\\node_modules\\pnpm\\dist\\pnpm.js:43178:24)\n    at async Object.resolveLocal [as default] (C:\\Users\\telev\\AppData\\Roaming\\npm-cache\\_npx\\3904\\node_modules\\pnpm\\dist\\pnpm.js:72178:33)\n    at async Object.resolve (C:\\Users\\telev\\AppData\\Roaming\\npm-cache\\_npx\\3904\\node_modules\\pnpm\\dist\\pnpm.js:73098:307)\n    at async run (C:\\Users\\telev\\AppData\\Roaming\\npm-cache\\_npx\\3904\\node_modules\\pnpm\\dist\\pnpm.js:83441:21)"
+    }
+  }
+}
