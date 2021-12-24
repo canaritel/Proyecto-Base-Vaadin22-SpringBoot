@@ -24,19 +24,19 @@ public class MainLayout extends AppLayout {
     }
 
     private void createHeader() {
-        // Aparece cuando ya nos logeamos
-        H2 logo = new H2("");
-        logo.addClassNames("text-1", "m-m"); // tamaño letra
+        // Diseño elementos barra superior
+        H2 textLogo = new H2("");
         Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
-        imgLogo.setHeight("30px"); // ajustamos el tamaño de la imagen
+        imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
         // Cerramos cuando se pulsa en Salir
         Button logout = new Button("Salir", e -> securityService.logout());
+        logout.setWidth("20px");
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, logo, logout);
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, logout);
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        header.expand(logo);
+        header.expand(textLogo);
         header.setWidth("100%");
         header.addClassNames("py-0", "px-m");
 

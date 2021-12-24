@@ -20,16 +20,17 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 	private final LoginForm loginForm = new LoginForm();
 
 	public LoginView() {
-		addClassName("login-view");
+		// addClassName("login-view");
+		addClassName("login-rich-content");
 		createLogin();
 		setSizeFull();
 		setAlignItems(Alignment.CENTER);
 		setJustifyContentMode(JustifyContentMode.CENTER);
 
 		Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
-		imgLogo.setHeight("66px"); // ajustamos el tamaño de la imagen
+		imgLogo.setHeight("64px"); // ajustamos el tamaño de la imagen
 		loginForm.setAction("login");
-		add(imgLogo, new H2(" "), loginForm, createFlags());
+		add(new H2(""), imgLogo, loginForm, createFlags());
 	}
 
 	private void createLogin() {
@@ -52,10 +53,9 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		i18n.getErrorMessage()
 				.setMessage("Confirme su usuario y contraseña e inténtelo nuevamente.");
 		i18n.setAdditionalInformation(
-				"El acceso en modo usuario permite solo crear y editar. "
-						+ "Los datos de acceso son: \"user | userpass\""
-						+ ". Para el acceso de tipo administrador (con todos los"
-						+ " permisos) deberá crear una cuenta.");
+				"Los datos de acceso son: \"user | userpass\"" +
+						". Para el acceso de tipo administrador (con todos los" +
+						" permisos) deberá crear una cuenta.");
 
 		return i18n;
 	}
