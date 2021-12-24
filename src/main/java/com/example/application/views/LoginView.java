@@ -1,5 +1,9 @@
 package com.example.application.views;
 
+import java.nio.charset.Charset;
+import java.util.Locale;
+
+import com.example.application.data.idiomas.Idioma;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -13,11 +17,15 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import org.springframework.context.annotation.PropertySource;
+
+@PropertySource(value = "classpath:application-${env}.properties", encoding = "UTF-8")
 @Route("login")
 @PageTitle("Login | Vaadin CRM")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private final LoginForm loginForm = new LoginForm();
+	private Idioma idioma = new Idioma("Spain");
 
 	public LoginView() {
 		// addClassName("login-view");
@@ -42,22 +50,23 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private LoginI18n createSpanishI18n() {
 		final LoginI18n i18n = LoginI18n.createDefault();
-
 		i18n.setHeader(new LoginI18n.Header());
-		i18n.getForm().setUsername("Usuario");
-		i18n.getForm().setTitle("Acceda a su cuenta");
-		i18n.getForm().setSubmit("Entrar");
-		i18n.getForm().setPassword("Contraseña");
-		i18n.getForm().setForgotPassword("Olvidé contraseña");
-		i18n.getErrorMessage().setTitle("Usuario/contraseña inválidos");
-		i18n.getErrorMessage()
-				.setMessage("Confirme su usuario y contraseña e inténtelo nuevamente.");
-		i18n.setAdditionalInformation(
-				"Los datos de acceso son: \"user | userpass\"" +
-						". Para el acceso de tipo administrador (con todos los" +
-						" permisos) deberá crear una cuenta.");
+		i18n.getForm().setTitle(formatearTexto("acceda"));
+		i18n.getForm().setSubmit(formatearTexto("entrar"));
+		i18n.getForm().setUsername(formatearTexto("usuario"));
+		i18n.getForm().setPassword(formatearTexto("clave"));
+		i18n.getForm().setForgotPassword(formatearTexto("recordar"));
+		i18n.getErrorMessage().setTitle(formatearTexto("error_titulo"));
+		i18n.getErrorMessage().setMessage(formatearTexto("error_texto"));
+		i18n.setAdditionalInformation(formatearTexto("info_acceso"));
 
 		return i18n;
+	}
+
+	// Este método es para que permita acentos y tildes de los campos traducidos
+	private String formatearTexto(String property) {
+		String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
+		return texto_formateado;
 	}
 
 	private Component createFlags() {
@@ -75,14 +84,14 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 		imgFlagSpain.addClickListener(e -> {
 			Notification.show("Ponemos los textos es español");
-			// language = new Language("Spain");
-			// loginForm.setI18n(createSpanishI18n());
+			idioma = new Idioma("Spain");
+			loginForm.setI18n(createSpanishI18n());
 		});
 
 		imgFlagUK.addClickListener(e -> {
 			Notification.show("Ponemos los textos es inglés");
-			// language = new Language("English");
-			// loginForm.setI18n(createSpanishI18n());
+			idioma = new Idioma("English");
+			loginForm.setI18n(createSpanishI18n());
 		});
 
 		return loginInformation;
@@ -98,4 +107,5 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 			loginForm.setError(true);
 		}
 	}
+
 }

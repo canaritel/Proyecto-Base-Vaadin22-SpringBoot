@@ -27,7 +27,7 @@ public class Idioma extends Properties {
         try {
             this.load(getClass().getResourceAsStream(idioma));
         } catch (IOException ex) {
-
+            System.err.println("No encuentro el archivo de traducciones " + idioma);
         }
     }
 
