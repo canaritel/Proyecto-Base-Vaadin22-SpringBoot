@@ -1,4 +1,3 @@
-@import url("./views/list-view.css");
 @import url("lumo-css-framework/all-classes.css");
 
 /* Main layout ************************************************
@@ -35,6 +34,8 @@ a[highlight] {
 }
 .login-rich-content vaadin-login-form-wrapper {
   background-image: none;
+  background-color: #faf9f9;
+  border-radius: 10px;
 }
 
 /* Login view ***************************************************
