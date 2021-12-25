@@ -1,5 +1,7 @@
 package com.example.application;
 
+import java.util.Locale;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.sql.DataSource;
@@ -12,12 +14,15 @@ import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.vaadin.artur.helpers.LaunchUtil;
 
 /**
@@ -55,6 +60,15 @@ public class Application extends SpringBootServletInitializer implements AppShel
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
+
+    @Bean // <--- 1
+    public LocaleResolver localeResolver() {
+        CookieLocaleResolver localeResolver = new CookieLocaleResolver(); // <--- 2
+        localeResolver.setDefaultLocale(Locale.forLanguageTag("es")); // <--- 3
+        return localeResolver;
+    }
+
+    public static String lang_default = "Spain"; // donde guardamos el idioma seleccionado de la APP
 
     public static void main(String[] args) {
         LaunchUtil.launchBrowserInDevelopmentMode(SpringApplication.run(Application.class, args));

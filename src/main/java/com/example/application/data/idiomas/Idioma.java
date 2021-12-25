@@ -12,15 +12,14 @@ public class Idioma extends Properties {
         // Cambia el nombre de los ficheros o añade los necesarios
         switch (idioma) {
             case "Spain":
-                getProperties("/traducciones/spanish.properties");
+                getProperties("/i18n/messages.properties");
                 break;
             case "English":
-                getProperties("/traducciones/english.properties");
+                getProperties("/i18n/messages_en.properties");
                 break;
             default:
                 getProperties("/traducciones/spanish.properties");
         }
-
     }
 
     private void getProperties(String idioma) {
