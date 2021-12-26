@@ -5,13 +5,13 @@ import java.util.Locale;
 
 import com.example.application.Application;
 import com.example.application.data.idiomas.Idioma;
+import com.example.application.utils.PrintText;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginI18n;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -23,17 +23,18 @@ import org.springframework.context.annotation.PropertySource;
 
 @PropertySource(value = "classpath:application-${env}.properties", encoding = "UTF-8") // ruta_por_defecto_para_las_properties_usadas_en_la_internacionalización
 @Route("login")
-@PageTitle("Login | Vaadin CRM")
+@PageTitle("Login | Cuponcito CRM")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private LoginForm loginForm = new LoginForm(); // inicializamos_objeto_formulario_Login
 	private Idioma idioma = new Idioma(Application.lang_default); // inicializamos_objeto_con_idioma_default
 	private Locale locale;
+
 	// private DetectarIdioma detectaIdioma; //pendiente de implementar
 
 	public LoginView() {
 		addClassName("login-rich-content");
-		createLogin();
+		crearLogin();
 		setSizeFull();
 		setAlignItems(Alignment.CENTER);
 		setJustifyContentMode(JustifyContentMode.CENTER);
@@ -43,26 +44,25 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 		loginForm.setAction("login"); // Set the LoginForm action to "login" to post the_login_form_to_Spring_Security
 
-		add(new H2(""), imgLogo, loginForm, personalizationLogin());
+		add(new H2(""), imgLogo, loginForm, personalizacionLogin());
 
 	}
 
 	// Desarrollamos e implementamos el uso de i18n internacionalización
 	// https://maresmewebdevelopers.wordpress.com/2017/11/02/hola-mundo-con-multi-idioma-vamos-a-aprender-a-configurar-la-internacionalidad-con-i18n-en-spring-boot/
 
-	private void muestras_idiomas() {
+	private void idiomaDispositivo() {
 		// System.out.println(UI.getCurrent().getLocale().getCountry());
 		System.out.println(UI.getCurrent().getLocale().getDisplayLanguage());
-		// System.out.println(UI.getCurrent().getLocale().getDisplayName());
-		// System.out.println(UI.getCurrent().getLocale().getISO3Language());
-		// System.out.println(UI.getCurrent().getLocale().getISO3Country());
 	}
 
-	private void createLogin() {
+	private void crearLogin() {
 		loginForm.getElement().getThemeList().add("light"); // lo ponemos estilo claro
 		loginForm.setI18n(createI18n()); // creamos nuestro componente login personalizado a nuestro idioma
 		loginForm.addForgotPasswordListener(
-				event -> Notification.show(formatearTexto("pendiente")));
+				event -> {
+					PrintText.imprime(formatearTexto("pendiente"), "GRIS");
+				});
 	}
 
 	private LoginI18n createI18n() {
@@ -86,7 +86,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		return texto_formateado;
 	}
 
-	private Component personalizationLogin() {
+	private Component personalizacionLogin() {
 		HorizontalLayout loginInformation = new HorizontalLayout();
 		// loginInformation.setClassName("information");
 		// Personalización del acceso
@@ -100,23 +100,23 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginInformation.setAlignItems(Alignment.CENTER);
 
 		imgFlagSpain.addClickListener(e -> {
-			// idioma = new Idioma("Spain"); // creamos objeto idioma de tipo Spain
-			idioma.setIdioma("Spain");
-			Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
+			idioma.setIdioma("Spain"); // seleccionamos objeto idioma de tipo Spain
+			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
+			PrintText.imprime(formatearTexto("idioma"), "VERDE");
 			Application.lang_default = "Spain"; // idioma por defecto
 			setLocale(new Locale("es", "ES")); // Locale lo creamos de tipo "Español | España"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
-			muestras_idiomas();
+			idiomaDispositivo();
 		});
 
 		imgFlagUK.addClickListener(e -> {
-			// idioma = new Idioma("English"); // creamos objeto idioma de tipo English
-			idioma.setIdioma("English");
-			Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
+			idioma.setIdioma("English"); // seleccionamos objeto idioma de tipo English
+			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
+			PrintText.imprime(formatearTexto("idioma"), "VERDE");
 			Application.lang_default = "English"; // idioma por defecto
 			setLocale(Locale.ENGLISH); // Locale lo creamos de tipo "Inglés| UK"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
-			muestras_idiomas();
+			idiomaDispositivo();
 		});
 
 		return loginInformation;

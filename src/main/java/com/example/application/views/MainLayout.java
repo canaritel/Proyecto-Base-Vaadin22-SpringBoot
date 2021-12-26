@@ -30,6 +30,7 @@ public class MainLayout extends AppLayout {
 
     private void createHeader() {
         // Diseño elementos barra superior
+        // https://stackoverflow.com/questions/57553973/where-should-i-place-my-vaadin-10-static-files/57553974#57553974
         H2 textLogo = new H2("");
         Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
@@ -44,6 +45,7 @@ public class MainLayout extends AppLayout {
         header.expand(textLogo);
         header.setWidth("100%");
         header.addClassNames("py-0", "px-m");
+        header.getThemeList().set("light", true);
 
         addToNavbar(header);
 
@@ -53,8 +55,7 @@ public class MainLayout extends AppLayout {
         RouterLink listLink = new RouterLink("List", ListView.class);
         listLink.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(
-                listLink,
+        addToDrawer(new VerticalLayout(listLink,
                 new RouterLink("Dashboard", DashboardView.class)));
     }
 
