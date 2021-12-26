@@ -26,19 +26,12 @@ import org.springframework.context.annotation.PropertySource;
 @PageTitle("Login | Vaadin CRM")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
-	private LoginForm loginForm; // Creamos el objeto formulario
-	private Idioma idioma; // Creamos objeto con idioma default
+	private LoginForm loginForm = new LoginForm(); // inicializamos_objeto_formulario_Login
+	private Idioma idioma = new Idioma(Application.lang_default); // inicializamos_objeto_con_idioma_default
 	private Locale locale;
-	// private DetectarIdioma detectaIdioma;
+	// private DetectarIdioma detectaIdioma; //pendiente de implementar
 
 	public LoginView() {
-		if (idioma == null) {
-			idioma = new Idioma(Application.lang_default); // inicializamos objeto con idioma default
-		}
-		if (loginForm == null) {
-			loginForm = new LoginForm(); // inicializamos objeto formulario Login
-		}
-
 		addClassName("login-rich-content");
 		createLogin();
 		setSizeFull();
@@ -107,7 +100,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginInformation.setAlignItems(Alignment.CENTER);
 
 		imgFlagSpain.addClickListener(e -> {
-			idioma = new Idioma("Spain"); // creamos objeto idioma de tipo Spain
+			// idioma = new Idioma("Spain"); // creamos objeto idioma de tipo Spain
+			idioma.setIdioma("Spain");
 			Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
 			Application.lang_default = "Spain"; // idioma por defecto
 			setLocale(new Locale("es", "ES")); // Locale lo creamos de tipo "Español | España"
@@ -116,7 +110,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		});
 
 		imgFlagUK.addClickListener(e -> {
-			idioma = new Idioma("English"); // creamos objeto idioma de tipo English
+			// idioma = new Idioma("English"); // creamos objeto idioma de tipo English
+			idioma.setIdioma("English");
 			Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
 			Application.lang_default = "English"; // idioma por defecto
 			setLocale(Locale.ENGLISH); // Locale lo creamos de tipo "Inglés| UK"

@@ -1,7 +1,8 @@
 package com.example.application.views;
 
+import java.nio.charset.Charset;
+
 import com.example.application.Application;
-import com.example.application.data.idiomas.FomatText;
 import com.example.application.data.idiomas.Idioma;
 import com.example.application.security.SecurityService;
 import com.example.application.views.list.ListView;
@@ -34,7 +35,7 @@ public class MainLayout extends AppLayout {
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
         // Cerramos cuando se pulsa en Salir
-        Button logout = new Button(FomatText.formatearTexto("salir", idioma), e -> securityService.logout());
+        Button logout = new Button(formatearTexto("salir"), e -> securityService.logout());
         logout.setWidth("20px");
 
         HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, logout);
@@ -55,5 +56,11 @@ public class MainLayout extends AppLayout {
         addToDrawer(new VerticalLayout(
                 listLink,
                 new RouterLink("Dashboard", DashboardView.class)));
+    }
+
+    // Este método permite acentos y tildes español de los campos traducidos
+    private String formatearTexto(String property) {
+        String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
+        return texto_formateado;
     }
 }

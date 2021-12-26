@@ -8,6 +8,10 @@ public class Idioma extends Properties {
     Properties properties = new Properties();
 
     public Idioma(String idioma) {
+        setIdioma(idioma);
+    }
+
+    public void setIdioma(String idioma) {
         // Modificar si quieres añadir mas idiomas
         // Cambia el nombre de los ficheros o añade los necesarios
         switch (idioma) {
