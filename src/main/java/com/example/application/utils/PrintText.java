@@ -5,26 +5,30 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 
 public class PrintText {
 
-    static public void imprime(String texto, String color) {
+    public enum Color {
+        AZUL, ROJO, VERDE, NEGRO, GRIS
+    }
+
+    static public void imprime(String texto, Color color) {
         Notification notification = Notification.show(texto);
         switch (color) {
-            case "AZUL":
+            case AZUL:
                 notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
                 break;
 
-            case "ROJO":
+            case ROJO:
                 notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                 break;
 
-            case "VERDE":
+            case VERDE:
                 notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                 break;
 
-            case "NEGRO":
+            case NEGRO:
                 notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
                 break;
 
-            case "GRIS":
+            case GRIS:
                 break;
 
             default:

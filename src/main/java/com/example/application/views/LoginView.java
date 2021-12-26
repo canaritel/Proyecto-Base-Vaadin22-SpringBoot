@@ -6,6 +6,7 @@ import java.util.Locale;
 import com.example.application.Application;
 import com.example.application.data.idiomas.Idioma;
 import com.example.application.utils.PrintText;
+import com.example.application.utils.PrintText.Color;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H2;
@@ -28,7 +29,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private LoginForm loginForm = new LoginForm(); // inicializamos_objeto_formulario_Login
 	private Idioma idioma = new Idioma(Application.lang_default); // inicializamos_objeto_con_idioma_default
-	private Locale locale;
+	private Locale locale = new Locale("es");
 
 	// private DetectarIdioma detectaIdioma; //pendiente de implementar
 
@@ -61,7 +62,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginForm.setI18n(createI18n()); // creamos nuestro componente login personalizado a nuestro idioma
 		loginForm.addForgotPasswordListener(
 				event -> {
-					PrintText.imprime(formatearTexto("pendiente"), "GRIS");
+					PrintText.imprime(formatearTexto("pendiente"), Color.GRIS);
 				});
 	}
 
@@ -102,7 +103,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		imgFlagSpain.addClickListener(e -> {
 			idioma.setIdioma("Spain"); // seleccionamos objeto idioma de tipo Spain
 			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
-			PrintText.imprime(formatearTexto("idioma"), "VERDE");
+			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
 			Application.lang_default = "Spain"; // idioma por defecto
 			setLocale(new Locale("es", "ES")); // Locale lo creamos de tipo "Español | España"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
@@ -112,7 +113,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		imgFlagUK.addClickListener(e -> {
 			idioma.setIdioma("English"); // seleccionamos objeto idioma de tipo English
 			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
-			PrintText.imprime(formatearTexto("idioma"), "VERDE");
+			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
 			Application.lang_default = "English"; // idioma por defecto
 			setLocale(Locale.ENGLISH); // Locale lo creamos de tipo "Inglés| UK"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
