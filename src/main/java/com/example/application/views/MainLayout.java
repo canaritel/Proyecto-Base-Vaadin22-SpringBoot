@@ -1,5 +1,8 @@
 package com.example.application.views;
 
+import com.example.application.Application;
+import com.example.application.data.idiomas.FomatText;
+import com.example.application.data.idiomas.Idioma;
 import com.example.application.security.SecurityService;
 import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -16,6 +19,7 @@ import com.vaadin.flow.router.RouterLink;
 public class MainLayout extends AppLayout {
 
     private final SecurityService securityService;
+    private Idioma idioma = new Idioma(Application.lang_default);
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
@@ -30,7 +34,7 @@ public class MainLayout extends AppLayout {
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
         // Cerramos cuando se pulsa en Salir
-        Button logout = new Button("Salir", e -> securityService.logout());
+        Button logout = new Button(FomatText.formatearTexto("salir", idioma), e -> securityService.logout());
         logout.setWidth("20px");
 
         HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, logout);

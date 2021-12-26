@@ -21,17 +21,24 @@ import com.vaadin.flow.router.Route;
 
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource(value = "classpath:application-${env}.properties", encoding = "UTF-8")
+@PropertySource(value = "classpath:application-${env}.properties", encoding = "UTF-8") // ruta_por_defecto_para_las_properties_usadas_en_la_internacionalización
 @Route("login")
 @PageTitle("Login | Vaadin CRM")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
-	private final LoginForm loginForm = new LoginForm();
-	private Idioma idioma = new Idioma(Application.lang_default); // Creamos objeto con idioma default
-	private Locale locale; // objeto para idioma y región
+	private LoginForm loginForm; // Creamos el objeto formulario
+	private Idioma idioma; // Creamos objeto con idioma default
+	private Locale locale;
+	// private DetectarIdioma detectaIdioma;
 
 	public LoginView() {
-		// addClassName("login-view");
+		if (idioma == null) {
+			idioma = new Idioma(Application.lang_default); // inicializamos objeto con idioma default
+		}
+		if (loginForm == null) {
+			loginForm = new LoginForm(); // inicializamos objeto formulario Login
+		}
+
 		addClassName("login-rich-content");
 		createLogin();
 		setSizeFull();
@@ -40,21 +47,22 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 		Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
 		imgLogo.setHeight("64px"); // ajustamos el tamaño de la imagen
-		loginForm.setAction("login");
+
+		loginForm.setAction("login"); // Set the LoginForm action to "login" to post the_login_form_to_Spring_Security
+
 		add(new H2(""), imgLogo, loginForm, personalizationLogin());
 
-		// detectarIdioma();
 	}
 
-	// Desarrollamos e implementamos en el uso de i18n internalización
+	// Desarrollamos e implementamos el uso de i18n internacionalización
 	// https://maresmewebdevelopers.wordpress.com/2017/11/02/hola-mundo-con-multi-idioma-vamos-a-aprender-a-configurar-la-internacionalidad-con-i18n-en-spring-boot/
 
 	private void muestras_idiomas() {
-		System.out.println(UI.getCurrent().getLocale().getCountry());
+		// System.out.println(UI.getCurrent().getLocale().getCountry());
 		System.out.println(UI.getCurrent().getLocale().getDisplayLanguage());
-		System.out.println(UI.getCurrent().getLocale().getDisplayName());
-		System.out.println(UI.getCurrent().getLocale().getISO3Language());
-		System.out.println(UI.getCurrent().getLocale().getISO3Country());
+		// System.out.println(UI.getCurrent().getLocale().getDisplayName());
+		// System.out.println(UI.getCurrent().getLocale().getISO3Language());
+		// System.out.println(UI.getCurrent().getLocale().getISO3Country());
 	}
 
 	private void createLogin() {
@@ -79,7 +87,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		return i18n;
 	}
 
-	// Este método permite acentos y tildes español de los campos traducidos Españ
+	// Este método permite acentos y tildes español de los campos traducidos
 	private String formatearTexto(String property) {
 		String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
 		return texto_formateado;
@@ -122,6 +130,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 	@Override
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		// inform the user about an authentication error
+		// Read query parameters and show an error if a login attempt fails.
 		if (beforeEnterEvent.getLocation()
 				.getQueryParameters()
 				.getParameters()
@@ -136,22 +145,6 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
-	}
-
-	private void detectarIdioma() {
-		muestras_idiomas();
-		String idioma_detectado = UI.getCurrent().getLocale().getDisplayLanguage();
-		if (idioma_detectado.equalsIgnoreCase("español")) {
-			System.out.println("Idioma detectado: " + idioma_detectado);
-			// idioma = new Idioma("Spain");
-			setLocale(new Locale("es", "ES"));
-			loginForm.setI18n(createI18n());
-		} else {
-			System.out.println("Idioma detectado: " + idioma_detectado);
-			// idioma = new Idioma("English");
-			setLocale(Locale.ENGLISH);
-			loginForm.setI18n(createI18n());
-		}
 	}
 
 }
