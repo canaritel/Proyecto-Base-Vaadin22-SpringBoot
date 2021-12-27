@@ -1,9 +1,8 @@
 package com.example.application.views;
 
-import java.nio.charset.Charset;
+import java.util.Locale;
 
 import com.example.application.Application;
-import com.example.application.data.idiomas.Idioma;
 import com.example.application.security.SecurityService;
 import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.Component;
@@ -31,7 +30,8 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class MainLayout extends AppLayout {
 
     private final SecurityService securityService;
-    private Idioma idioma = new Idioma(Application.lang_APP);
+    private final Locale LOCALE_ES = new Locale("es");
+    private final Locale LOCALE_EN = new Locale("en");
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
@@ -65,7 +65,7 @@ public class MainLayout extends AppLayout {
         MenuItem item = menuBar.addItem(new Icon(VaadinIcon.COG_O));
         SubMenu shareSubMenu = item.getSubMenu();
 
-        MenuItem onColor = shareSubMenu.addItem(formatearTexto("color"));
+        MenuItem onColor = shareSubMenu.addItem(formatText("color"));
         onColor.addClickListener(e -> {
             ThemeList themeList = UI.getCurrent().getElement().getThemeList(); // tipo de Modo activado
             if (themeList.contains(Lumo.DARK)) {
@@ -75,24 +75,24 @@ public class MainLayout extends AppLayout {
             }
         });
 
-        MenuItem onIdioma = shareSubMenu.addItem(formatearTexto("lenguaje") + ": " + formatearTexto("idioma"));
+        MenuItem onIdioma = shareSubMenu.addItem(formatText("lenguaje") + ": " + formatText("idioma"));
         onIdioma.addClickListener(e -> {
-            if (Application.lang_APP.equalsIgnoreCase("Spain")) {
-                Application.lang_APP = "English";
+            if (Application.locale_APP.getLanguage().equalsIgnoreCase("es")) {
+                Application.locale_APP = LOCALE_EN;
             } else {
-                Application.lang_APP = "Spain";
+                Application.locale_APP = LOCALE_ES;
             }
             UI.getCurrent().getPage().reload();
         });
 
-        MenuItem onSocialMedia = shareSubMenu.addItem(formatearTexto("opcion"));
+        MenuItem onSocialMedia = shareSubMenu.addItem(formatText("opcion"));
         SubMenu socialMediaSubMenu = onSocialMedia.getSubMenu();
-        socialMediaSubMenu.addItem(formatearTexto("perfil"), e -> System.out.println());
-        socialMediaSubMenu.addItem(formatearTexto("cuenta"), e -> System.out.println());
-        socialMediaSubMenu.addItem(formatearTexto("personalizacion"), e -> System.out.println());
+        socialMediaSubMenu.addItem(formatText("perfil"), e -> System.out.println());
+        socialMediaSubMenu.addItem(formatText("cuenta"), e -> System.out.println());
+        socialMediaSubMenu.addItem(formatText("personalizacion"), e -> System.out.println());
 
         shareSubMenu.add(new Hr());
-        shareSubMenu.addItem(formatearTexto("cerrar")).addClickListener(e -> securityService.logout());
+        shareSubMenu.addItem(formatText("cerrar")).addClickListener(e -> securityService.logout());
 
         div.add(menuBar);
         return div;
@@ -106,9 +106,9 @@ public class MainLayout extends AppLayout {
                 new RouterLink("Dashboard", DashboardView.class)));
     }
 
-    // Este método permite acentos y tildes español de los campos traducidos
-    private String formatearTexto(String property) {
-        String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
-        return texto_formateado;
+    private String formatText(String property) {
+        // Este método devuelve el texto traducido.
+        // Nos decir está "depreciado" pero lo vamos a continuar usando
+        return getTranslation(property, Application.locale_APP);
     }
 }

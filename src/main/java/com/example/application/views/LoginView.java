@@ -5,8 +5,8 @@ import java.util.Locale;
 
 import com.example.application.Application;
 import com.example.application.data.idiomas.Idioma;
-import com.example.application.utils.PrintText;
-import com.example.application.utils.PrintText.Color;
+import com.example.application.data.idiomas.PrintText;
+import com.example.application.data.idiomas.PrintText.Color;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H2;
@@ -15,6 +15,8 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -25,11 +27,14 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:application-${env}.properties", encoding = "UTF-8") // ruta_por_defecto_para_las_properties_usadas_en_la_internacionalización
 @Route("login")
 @PageTitle("Login | Cuponcito CRM")
-public class LoginView extends VerticalLayout implements BeforeEnterObserver {
+public class LoginView extends VerticalLayout implements BeforeEnterObserver, LocaleChangeObserver {
 
 	private LoginForm loginForm = new LoginForm(); // inicializamos_objeto_formulario_Login
 	private Idioma idioma = new Idioma(Application.lang_APP); // inicializamos_objeto_con_idioma_default
-	private Locale locale = new Locale("es");
+	private final Locale LOCALE_ES = new Locale("es");
+	private final Locale LOCALE_EN = new Locale("en");
+
+	private String texto = "";
 
 	// private DetectarIdioma detectaIdioma; //pendiente de implementar
 
@@ -52,6 +57,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 	}
 
 	// Desarrollamos e implementamos el uso de i18n internacionalización
+	// https://vaadin.com/docs/v14/flow/advanced/tutorial-i18n-localization
+	// https://github.com/vaadin-learning-center/flow-i18n-i18nprovider
 	// https://maresmewebdevelopers.wordpress.com/2017/11/02/hola-mundo-con-multi-idioma-vamos-a-aprender-a-configurar-la-internacionalidad-con-i18n-en-spring-boot/
 
 	private void crearLogin() {
@@ -78,12 +85,6 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		return i18n;
 	}
 
-	// Este método permite acentos y tildes español de los campos traducidos
-	private String formatearTexto(String property) {
-		String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
-		return texto_formateado;
-	}
-
 	private Component personalizacionLogin() {
 		HorizontalLayout loginInformation = new HorizontalLayout();
 		// loginInformation.setClassName("information");
@@ -98,21 +99,21 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginInformation.setAlignItems(Alignment.CENTER);
 
 		imgFlagSpain.addClickListener(e -> {
+			Application.locale_APP = LOCALE_ES; // nuevo método
 			idioma.setIdioma("Spain"); // seleccionamos objeto idioma de tipo Spain
 			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
 			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
 			Application.lang_APP = "Spain"; // idioma por defecto
-			setLocale(new Locale("es", "ES")); // Locale lo creamos de tipo "Español | España"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
 			idiomaDispositivo();
 		});
 
 		imgFlagUK.addClickListener(e -> {
+			Application.locale_APP = LOCALE_EN; // nuevo método
 			idioma.setIdioma("English"); // seleccionamos objeto idioma de tipo English
 			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
 			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
 			Application.lang_APP = "English"; // idioma por defecto
-			setLocale(Locale.ENGLISH); // Locale lo creamos de tipo "Inglés| UK"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
 			idiomaDispositivo();
 		});
@@ -122,8 +123,14 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private void idiomaDispositivo() {
 		Application.lang_default = UI.getCurrent().getLocale().getDisplayLanguage();
-		// System.out.println(UI.getCurrent().getLocale().getCountry());
+		System.out.println(UI.getCurrent().getLocale().getLanguage());
 		System.out.println("Dispositivo idioma: " + Application.lang_default);
+	}
+
+	// Este método permite acentos y tildes español de los campos traducidos
+	private String formatearTexto(String property) {
+		String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
+		return texto_formateado;
 	}
 
 	@Override
@@ -138,12 +145,14 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		}
 	}
 
-	public Locale getLocale() {
-		return locale;
-	}
+	@Override
+	public void localeChange(LocaleChangeEvent arg0) {
+		texto = getTranslation("saludo", LOCALE_EN);
+		System.out.println(texto);
 
-	public void setLocale(Locale locale) {
-		this.locale = locale;
+		texto = getTranslation("saludo", LOCALE_ES);
+		System.out.println(texto);
+
 	}
 
 }

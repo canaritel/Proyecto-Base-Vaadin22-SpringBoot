@@ -1,4 +1,4 @@
-package com.example.application.utils;
+package com.example.application.data.idiomas;
 
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
