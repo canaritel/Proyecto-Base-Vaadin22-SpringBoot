@@ -14,7 +14,6 @@ import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -35,6 +34,9 @@ import org.vaadin.artur.helpers.LaunchUtil;
 @PWA(name = "Cuponcito.com", shortName = "Coupon", offlinePath = "offline.html", offlineResources = {
         "./images/offline.png" }) // la carpeta de las imágenes está en META-INFs
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
+
+    public static String lang_default;// idoma_del_dispositivo_por_defecto
+    public static String lang_APP = "Spain"; // donde guardamos el idioma seleccionado de la APP
 
     /*
      * ***** DECLARAMOS LOS VALORES Y PROPIEDADES PERSISTENCIA EN OBJECTDB ****
@@ -67,8 +69,6 @@ public class Application extends SpringBootServletInitializer implements AppShel
         localeResolver.setDefaultLocale(Locale.forLanguageTag("es")); // <--- 3
         return localeResolver;
     }
-
-    public static String lang_default = "Spain"; // donde guardamos el idioma seleccionado de la APP
 
     public static void main(String[] args) {
         LaunchUtil.launchBrowserInDevelopmentMode(SpringApplication.run(Application.class, args));

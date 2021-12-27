@@ -31,7 +31,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class MainLayout extends AppLayout {
 
     private final SecurityService securityService;
-    private Idioma idioma = new Idioma(Application.lang_default);
+    private Idioma idioma = new Idioma(Application.lang_APP);
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
@@ -46,11 +46,6 @@ public class MainLayout extends AppLayout {
         Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
-        // Cerramos cuando se pulsa en Salir
-        // Button logout = new Button(formatearTexto("salir"), e ->
-        // securityService.logout());
-        // logout.setWidth("20px");
-
         HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, menuBar());
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
@@ -60,7 +55,6 @@ public class MainLayout extends AppLayout {
         header.getThemeList().set("light", true);
 
         addToNavbar(header);
-
     }
 
     private Component menuBar() {
@@ -83,10 +77,10 @@ public class MainLayout extends AppLayout {
 
         MenuItem onIdioma = shareSubMenu.addItem(formatearTexto("lenguaje") + ": " + formatearTexto("idioma"));
         onIdioma.addClickListener(e -> {
-            if (Application.lang_default.equalsIgnoreCase("Spain")) {
-                Application.lang_default = "English";
+            if (Application.lang_APP.equalsIgnoreCase("Spain")) {
+                Application.lang_APP = "English";
             } else {
-                Application.lang_default = "Spain";
+                Application.lang_APP = "Spain";
             }
             UI.getCurrent().getPage().reload();
         });
@@ -102,13 +96,6 @@ public class MainLayout extends AppLayout {
 
         div.add(menuBar);
         return div;
-    }
-
-    private MenuItem createIconItem(MenuBar menu, VaadinIcon iconName, String ariaLabel) {
-        Icon icon = new Icon(iconName);
-        MenuItem item = menu.addItem(icon);
-        item.getElement().setAttribute("aria-label", ariaLabel);
-        return item;
     }
 
     private void createDrawer() {

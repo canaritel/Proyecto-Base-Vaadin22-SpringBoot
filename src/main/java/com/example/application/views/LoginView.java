@@ -28,12 +28,15 @@ import org.springframework.context.annotation.PropertySource;
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private LoginForm loginForm = new LoginForm(); // inicializamos_objeto_formulario_Login
-	private Idioma idioma = new Idioma(Application.lang_default); // inicializamos_objeto_con_idioma_default
+	private Idioma idioma = new Idioma(Application.lang_APP); // inicializamos_objeto_con_idioma_default
 	private Locale locale = new Locale("es");
 
 	// private DetectarIdioma detectaIdioma; //pendiente de implementar
 
 	public LoginView() {
+		if (Application.lang_default == null) {
+			Application.lang_default = UI.getCurrent().getLocale().getDisplayLanguage();
+		}
 		addClassName("login-rich-content");
 		crearLogin();
 		setSizeFull();
@@ -46,16 +49,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		loginForm.setAction("login"); // Set the LoginForm action to "login" to post the_login_form_to_Spring_Security
 
 		add(new H2(""), imgLogo, loginForm, personalizacionLogin());
-
 	}
 
 	// Desarrollamos e implementamos el uso de i18n internacionalización
 	// https://maresmewebdevelopers.wordpress.com/2017/11/02/hola-mundo-con-multi-idioma-vamos-a-aprender-a-configurar-la-internacionalidad-con-i18n-en-spring-boot/
-
-	private void idiomaDispositivo() {
-		// System.out.println(UI.getCurrent().getLocale().getCountry());
-		System.out.println(UI.getCurrent().getLocale().getDisplayLanguage());
-	}
 
 	private void crearLogin() {
 		loginForm.getElement().getThemeList().add("light"); // lo ponemos estilo claro
@@ -104,7 +101,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 			idioma.setIdioma("Spain"); // seleccionamos objeto idioma de tipo Spain
 			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
 			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
-			Application.lang_default = "Spain"; // idioma por defecto
+			Application.lang_APP = "Spain"; // idioma por defecto
 			setLocale(new Locale("es", "ES")); // Locale lo creamos de tipo "Español | España"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
 			idiomaDispositivo();
@@ -114,13 +111,19 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 			idioma.setIdioma("English"); // seleccionamos objeto idioma de tipo English
 			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
 			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
-			Application.lang_default = "English"; // idioma por defecto
+			Application.lang_APP = "English"; // idioma por defecto
 			setLocale(Locale.ENGLISH); // Locale lo creamos de tipo "Inglés| UK"
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
 			idiomaDispositivo();
 		});
 
 		return loginInformation;
+	}
+
+	private void idiomaDispositivo() {
+		Application.lang_default = UI.getCurrent().getLocale().getDisplayLanguage();
+		// System.out.println(UI.getCurrent().getLocale().getCountry());
+		System.out.println("Dispositivo idioma: " + Application.lang_default);
 	}
 
 	@Override
