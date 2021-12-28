@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.sql.DataSource;
 
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
@@ -25,12 +26,28 @@ import org.vaadin.artur.helpers.LaunchUtil;
 /**
  * The entry point of the Spring Boot application.
  */
+@Theme("flowcrmtutorial")
+@CssImport(value = "./styles/components/charts.css", themeFor = "vaadin-chart", include = "vaadin-chart-default-theme")
+@CssImport(value = "./styles/components/floating-action-button.css", themeFor = "vaadin-button")
+@CssImport(value = "./styles/components/grid.css", themeFor = "vaadin-grid")
+@CssImport("./styles/lumo/border-radius.css")
+@CssImport("./styles/lumo/icon-size.css")
+@CssImport("./styles/lumo/margin.css")
+@CssImport("./styles/lumo/padding.css")
+@CssImport("./styles/lumo/shadow.css")
+@CssImport("./styles/lumo/spacing.css")
+@CssImport("./styles/lumo/typography.css")
+@CssImport("./styles/misc/box-shadow-borders.css")
+@CssImport(value = "./styles/styles.css", include = "lumo-badge")
+// @JsModule("@vaadin/vaadin-lumo-styles/badge")
+
+@PWA(name = "Cuponcito.com", shortName = "Coupon", iconPath = "images/logos/18.png", offlinePath = "offline.html", backgroundColor = "#233348", themeColor = "#233348", offlineResources = {
+        "./images/offline.png" }) // la carpeta de las imágenes está en META-INFs
+
 @SpringBootApplication
 @EnableAutoConfiguration
 @NpmPackage(value = "lumo-css-framework", version = "^4.0.10")
-@Theme("flowcrmtutorial")
-@PWA(name = "Cuponcito.com", shortName = "Coupon", offlinePath = "offline.html", offlineResources = {
-        "./images/offline.png" }) // la carpeta de las imágenes está en META-INFs
+
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
 
     public static String lang_default;// idoma_del_dispositivo_por_defecto
