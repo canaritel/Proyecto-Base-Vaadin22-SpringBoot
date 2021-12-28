@@ -2,7 +2,7 @@ package com.example.application.ui.components;
 
 import java.util.ArrayList;
 
-import com.example.application.ui.layout.size.Size;
+import com.example.application.ui.layout.Size;
 import com.example.application.ui.utils.Overflow;
 import com.example.application.ui.utils.css.BorderRadius;
 import com.example.application.ui.utils.css.BoxSizing;

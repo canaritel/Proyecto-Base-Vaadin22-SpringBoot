@@ -1,4 +1,4 @@
-package com.example.application.views.estadistica;
+package com.example.application.ui.views.estadistica;
 
 import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

@@ -1,4 +1,4 @@
-package com.example.application.views.list;
+package com.example.application.ui.views.list;
 
 import com.example.application.data.entity.Company;
 import com.example.application.data.entity.Contact;
@@ -47,7 +47,7 @@ public class ContactForm extends FormLayout {
         email,
         company,
         status,
-        createButtonsLayout()); 
+        createButtonsLayout());
   }
 
   private HorizontalLayout createButtonsLayout() {
@@ -62,10 +62,9 @@ public class ContactForm extends FormLayout {
     delete.addClickListener(event -> fireEvent(new DeleteEvent(this, contact)));
     close.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
-
     binder.addStatusChangeListener(e -> save.setEnabled(binder.isValid()));
 
-    return new HorizontalLayout(save, delete, close); 
+    return new HorizontalLayout(save, delete, close);
   }
 
   public void setContact(Contact contact) {
@@ -116,7 +115,7 @@ public class ContactForm extends FormLayout {
   }
 
   public <T extends ComponentEvent<?>> Registration addListener(Class<T> eventType,
-                                                                ComponentEventListener<T> listener) {
+      ComponentEventListener<T> listener) {
     return getEventBus().addListener(eventType, listener);
   }
 }

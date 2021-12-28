@@ -1,4 +1,4 @@
-package com.example.application.views.list;
+package com.example.application.ui.views.list;
 
 import javax.annotation.security.PermitAll;
 

@@ -1,4 +1,4 @@
-package com.example.application.views.tiendas;
+package com.example.application.ui.views.tiendas;
 
 import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

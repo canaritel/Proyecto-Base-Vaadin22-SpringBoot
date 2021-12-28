@@ -1,4 +1,4 @@
-package com.example.application.views;
+package com.example.application.ui.views;
 
 import java.util.Locale;
 

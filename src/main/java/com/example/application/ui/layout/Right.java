@@ -1,4 +1,4 @@
-package com.example.application.ui.layout.size;
+package com.example.application.ui.layout;
 
 public enum Right implements Size {
 

@@ -1,4 +1,4 @@
-package com.example.application.views.zonas;
+package com.example.application.ui.views.zonas;
 
 import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

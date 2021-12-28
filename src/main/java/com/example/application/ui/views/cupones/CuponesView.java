@@ -1,4 +1,4 @@
-package com.example.application.views.cupones;
+package com.example.application.ui.views.cupones;
 
 import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

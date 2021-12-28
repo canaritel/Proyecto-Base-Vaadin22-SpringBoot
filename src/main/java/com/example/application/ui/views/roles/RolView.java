@@ -1,4 +1,4 @@
-package com.example.application.views.roles;
+package com.example.application.ui.views.roles;
 
 import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
