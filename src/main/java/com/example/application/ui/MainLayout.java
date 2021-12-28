@@ -1,9 +1,11 @@
-package com.example.application.views;
+package com.example.application.ui;
 
 import java.util.Locale;
 
 import com.example.application.Application;
 import com.example.application.security.SecurityService;
+import com.example.application.ui.components.FlexBoxLayout;
+import com.example.application.ui.utils.Overflow;
 import com.example.application.views.cupones.CuponesView;
 import com.example.application.views.estadistica.EstadisticaView;
 import com.example.application.views.list.ListView;
@@ -29,6 +31,7 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
+import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexDirection;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -44,12 +47,18 @@ public class MainLayout extends AppLayout {
     private final Locale LOCALE_ES = new Locale("es");
     private final Locale LOCALE_EN = new Locale("en");
     private Tabs tabs;
-    private MenuBar menuBar;
+    private MenuBar menuSuperiorDerecha;
+    private FlexBoxLayout viewContainer;
+    private static final String CLASS_NAME = "root";
+    private FlexBoxLayout column;
+    private FlexBoxLayout row;
+    private VerticalLayout naviDrawer;
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
         createHeader();
         createDrawer(createTabs());
+        // initStructure();
     }
 
     private void createHeader() {
@@ -59,7 +68,7 @@ public class MainLayout extends AppLayout {
         Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, menuBar());
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, menuSuperiorDerecha());
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(textLogo);
@@ -70,13 +79,38 @@ public class MainLayout extends AppLayout {
         addToNavbar(header);
     }
 
-    private Component menuBar() {
+    /**
+     * Initialise the required components and containers.
+     */
+    private void initStructure() {
+        naviDrawer = new VerticalLayout();
+
+        viewContainer = new FlexBoxLayout();
+        viewContainer.addClassName(CLASS_NAME + "__view-container");
+        viewContainer.setOverflow(Overflow.HIDDEN);
+
+        column = new FlexBoxLayout(viewContainer);
+        column.addClassName(CLASS_NAME + "__column");
+        column.setFlexDirection(FlexDirection.COLUMN);
+        column.setFlexGrow(1, viewContainer);
+        column.setOverflow(Overflow.HIDDEN);
+
+        row = new FlexBoxLayout(naviDrawer, column);
+        row.addClassName(CLASS_NAME + "__row");
+        row.setFlexGrow(1, column);
+        row.setOverflow(Overflow.HIDDEN);
+
+        naviDrawer.add(row);
+        naviDrawer.setFlexGrow(1, row);
+    }
+
+    private Component menuSuperiorDerecha() {
         Div div = new Div();
 
-        menuBar = new MenuBar();
-        menuBar.addThemeVariants(MenuBarVariant.LUMO_ICON, MenuBarVariant.LUMO_PRIMARY);
+        menuSuperiorDerecha = new MenuBar();
+        menuSuperiorDerecha.addThemeVariants(MenuBarVariant.LUMO_ICON, MenuBarVariant.LUMO_PRIMARY);
 
-        MenuItem item = menuBar.addItem(new Icon(VaadinIcon.COG_O));
+        MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.COG_O));
         SubMenu shareSubMenu = item.getSubMenu();
 
         MenuItem onColor = shareSubMenu.addItem(formatText("color"));
@@ -122,7 +156,7 @@ public class MainLayout extends AppLayout {
         shareSubMenu.add(new Hr());
         shareSubMenu.addItem(formatText("cerrar")).addClickListener(e -> securityService.logout());
 
-        div.add(menuBar);
+        div.add(menuSuperiorDerecha);
 
         return div;
     }
@@ -179,11 +213,9 @@ public class MainLayout extends AppLayout {
 
     private RouterLink createMenuLink(Class<? extends Component> viewClass, String caption) {
         final RouterLink routerLink = new RouterLink(null, viewClass);
-
         routerLink.setClassName("menu-link");
-        // routerLink.add(icon);
         routerLink.add(new Span(caption));
-        // icon.setSize("24px");
+
         return routerLink;
     }
 

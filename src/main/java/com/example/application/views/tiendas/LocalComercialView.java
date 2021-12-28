@@ -1,6 +1,6 @@
 package com.example.application.views.tiendas;
 
-import com.example.application.views.MainLayout;
+import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 

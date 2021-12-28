@@ -1,4 +1,5 @@
 import 'construct-style-sheets-polyfill';
+import { unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin/register-styles';
 
 const createLinkReferences = (css, target) => {
   // Unresolved urls are written as '@import url(text);' to the css
@@ -51,6 +52,19 @@ import { typography } from '@vaadin/vaadin-lumo-styles';
 import { color } from '@vaadin/vaadin-lumo-styles';
 import { spacing } from '@vaadin/vaadin-lumo-styles';
 import { badge } from '@vaadin/vaadin-lumo-styles';
+import accountSwitcherCss from 'themes/flowcrmtutorial/components/account-switcher.css?inline';
+import appBarCss from 'themes/flowcrmtutorial/components/app-bar.css?inline';
+import brandExpressionCss from 'themes/flowcrmtutorial/components/brand-expression.css?inline';
+import chartsCss from 'themes/flowcrmtutorial/components/charts.css?inline';
+import detailsDrawerCss from 'themes/flowcrmtutorial/components/details-drawer.css?inline';
+import floatingActionButtonCss from 'themes/flowcrmtutorial/components/floating-action-button.css?inline';
+import gridCss from 'themes/flowcrmtutorial/components/grid.css?inline';
+import listItemCss from 'themes/flowcrmtutorial/components/list-item.css?inline';
+import naviDrawerCss from 'themes/flowcrmtutorial/components/navi-drawer.css?inline';
+import naviItemCss from 'themes/flowcrmtutorial/components/navi-item.css?inline';
+import naviMenuCss from 'themes/flowcrmtutorial/components/navi-menu.css?inline';
+import tabBarCss from 'themes/flowcrmtutorial/components/tab-bar.css?inline';
+import viewFrameCss from 'themes/flowcrmtutorial/components/view-frame.css?inline';
 
 window.Vaadin = window.Vaadin || {};
 window.Vaadin.theme = window.Vaadin.theme || {};
@@ -94,6 +108,58 @@ export const applyTheme = (target) => {
     
   
   if (!document['_vaadintheme_flowcrmtutorial_componentCss']) {
+    registerStyles(
+      'account-switcher',
+      unsafeCSS(accountSwitcherCss.toString())
+    );
+    registerStyles(
+      'app-bar',
+      unsafeCSS(appBarCss.toString())
+    );
+    registerStyles(
+      'brand-expression',
+      unsafeCSS(brandExpressionCss.toString())
+    );
+    registerStyles(
+      'charts',
+      unsafeCSS(chartsCss.toString())
+    );
+    registerStyles(
+      'details-drawer',
+      unsafeCSS(detailsDrawerCss.toString())
+    );
+    registerStyles(
+      'floating-action-button',
+      unsafeCSS(floatingActionButtonCss.toString())
+    );
+    registerStyles(
+      'grid',
+      unsafeCSS(gridCss.toString())
+    );
+    registerStyles(
+      'list-item',
+      unsafeCSS(listItemCss.toString())
+    );
+    registerStyles(
+      'navi-drawer',
+      unsafeCSS(naviDrawerCss.toString())
+    );
+    registerStyles(
+      'navi-item',
+      unsafeCSS(naviItemCss.toString())
+    );
+    registerStyles(
+      'navi-menu',
+      unsafeCSS(naviMenuCss.toString())
+    );
+    registerStyles(
+      'tab-bar',
+      unsafeCSS(tabBarCss.toString())
+    );
+    registerStyles(
+      'view-frame',
+      unsafeCSS(viewFrameCss.toString())
+    );
     
     document['_vaadintheme_flowcrmtutorial_componentCss'] = true;
   }
