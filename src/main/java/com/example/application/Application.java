@@ -20,8 +20,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.vaadin.artur.helpers.LaunchUtil;
 
 /**
@@ -46,7 +44,7 @@ public class Application extends SpringBootServletInitializer implements AppShel
     @Bean(name = "entityManagerFactory")
     public EntityManagerFactory getEntityManagerFactoryBean() {
         return Persistence.createEntityManagerFactory(
-                "objectdb://91.121.134.199:6136/test-spring-jpa3.tmp;drop;user=tonii;password=gs21612161C");
+                "objectdb://91.121.134.199:6136/test-spring-jpa4.tmp;drop;user=tonii;password=gs21612161C");
         // "objectdb:test-spring-jpa.tmp;drop;user=admin;password=admin");
         // Las BD con extensión odb no se borrarán con "drop", si las "tmp"
     }
@@ -62,13 +60,6 @@ public class Application extends SpringBootServletInitializer implements AppShel
     @ConfigurationProperties("app.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
-    }
-
-    @Bean // <--- 1
-    public LocaleResolver localeResolver() {
-        CookieLocaleResolver localeResolver = new CookieLocaleResolver(); // <--- 2
-        localeResolver.setDefaultLocale(Locale.forLanguageTag("es")); // <--- 3
-        return localeResolver;
     }
 
     public static void main(String[] args) {

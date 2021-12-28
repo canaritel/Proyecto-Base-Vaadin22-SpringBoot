@@ -2,8 +2,8 @@ package com.example.application.ui.views.list;
 
 import javax.annotation.security.PermitAll;
 
-import com.example.application.data.entity.Contact;
-import com.example.application.data.service.CrmService;
+import com.example.application.backend.data.entity.Contact;
+import com.example.application.backend.data.service.CrmService;
 import com.example.application.ui.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;

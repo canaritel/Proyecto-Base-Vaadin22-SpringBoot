@@ -3,8 +3,8 @@ package com.example.application.ui.views;
 import java.util.Locale;
 
 import com.example.application.Application;
-import com.example.application.data.idiomas.PrintText;
-import com.example.application.data.idiomas.PrintText.Color;
+import com.example.application.backend.data.idiomas.PrintText;
+import com.example.application.backend.data.idiomas.PrintText.Color;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H2;

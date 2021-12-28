@@ -1,8 +1,8 @@
 package com.example.application.ui.views.list;
 
-import com.example.application.data.entity.Company;
-import com.example.application.data.entity.Contact;
-import com.example.application.data.entity.Status;
+import com.example.application.backend.data.entity.Company;
+import com.example.application.backend.data.entity.Contact;
+import com.example.application.backend.data.entity.Status;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;

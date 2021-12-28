@@ -3,7 +3,7 @@ package com.example.application.ui;
 import java.util.Locale;
 
 import com.example.application.Application;
-import com.example.application.security.SecurityService;
+import com.example.application.backend.security.SecurityService;
 import com.example.application.ui.components.FlexBoxLayout;
 import com.example.application.ui.utils.Overflow;
 import com.example.application.ui.views.cupones.CuponesView;

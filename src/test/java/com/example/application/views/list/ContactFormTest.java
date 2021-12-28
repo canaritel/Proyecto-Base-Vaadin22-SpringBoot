@@ -3,9 +3,9 @@ package com.example.application.views.list;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.application.data.entity.Company;
-import com.example.application.data.entity.Contact;
-import com.example.application.data.entity.Status;
+import com.example.application.backend.data.entity.Company;
+import com.example.application.backend.data.entity.Contact;
+import com.example.application.backend.data.entity.Status;
 
 import org.junit.Before;
 
