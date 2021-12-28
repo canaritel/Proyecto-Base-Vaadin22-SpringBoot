@@ -22,22 +22,19 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.dom.ThemeList;
-import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -47,6 +44,7 @@ public class MainLayout extends AppLayout {
     private final Locale LOCALE_ES = new Locale("es");
     private final Locale LOCALE_EN = new Locale("en");
     private Tabs tabs;
+    private MenuBar menuBar;
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
@@ -74,8 +72,8 @@ public class MainLayout extends AppLayout {
 
     private Component menuBar() {
         Div div = new Div();
-        MenuBar menuBar = new MenuBar();
-        // MenuBar.MenuBarI18n customI18n = new MenuBar.MenuBarI18n();
+
+        menuBar = new MenuBar();
         menuBar.addThemeVariants(MenuBarVariant.LUMO_ICON, MenuBarVariant.LUMO_PRIMARY);
 
         MenuItem item = menuBar.addItem(new Icon(VaadinIcon.COG_O));
@@ -91,46 +89,59 @@ public class MainLayout extends AppLayout {
             }
         });
 
-        MenuItem onIdioma = shareSubMenu.addItem(formatText("lenguaje") + ": " + formatText("idioma"));
-        onIdioma.addClickListener(e -> {
-            if (Application.locale_APP.getLanguage().equalsIgnoreCase("es")) {
-                Application.locale_APP = LOCALE_EN;
-            } else {
-                Application.locale_APP = LOCALE_ES;
-            }
-            UI.getCurrent().getPage().reload();
+        MenuItem onPerfil = shareSubMenu.addItem(formatText("perfil"));
+        onPerfil.addClickListener(e -> {
         });
 
-        MenuItem onSocialMedia = shareSubMenu.addItem(formatText("opcion"));
-        SubMenu socialMediaSubMenu = onSocialMedia.getSubMenu();
-        socialMediaSubMenu.addItem(formatText("perfil"), e -> System.out.println());
-        socialMediaSubMenu.addItem(formatText("cuenta"), e -> System.out.println());
-        socialMediaSubMenu.addItem(formatText("personalizacion"), e -> System.out.println());
+        MenuItem onCuenta = shareSubMenu.addItem(formatText("cuenta"));
+        onCuenta.addClickListener(e -> {
+        });
+
+        MenuItem onPersonal = shareSubMenu.addItem(formatText("personalizacion"));
+        onPersonal.addClickListener(e -> {
+        });
+
+        MenuItem onIdioma2 = shareSubMenu.addItem(formatText("lenguaje"));
+        SubMenu onIdioma2SubMenu = onIdioma2.getSubMenu();
+        onIdioma2SubMenu.addItem(formatText("espanol"), e -> {
+            cambioIdioma(LOCALE_ES);
+        });
+        onIdioma2SubMenu.addItem(formatText("ingles"), e -> {
+            cambioIdioma(LOCALE_EN);
+        });
+        onIdioma2SubMenu.addItem(formatText("frances"), e -> {
+            cambioIdioma(LOCALE_EN);
+        });
+        onIdioma2SubMenu.addItem(formatText("aleman"), e -> {
+            cambioIdioma(LOCALE_EN);
+        });
+        onIdioma2SubMenu.addItem(formatText("italia"), e -> {
+            cambioIdioma(LOCALE_EN);
+        });
 
         shareSubMenu.add(new Hr());
         shareSubMenu.addItem(formatText("cerrar")).addClickListener(e -> securityService.logout());
 
         div.add(menuBar);
+
         return div;
     }
 
+    private void cambioIdioma(Locale locale) {
+        Application.locale_APP = locale;
+        UI.getCurrent().getPage().reload();
+    }
+
     private void createDrawer(Tabs tabs) {
-        // Muestra un espacio en la barra de tabs
         VerticalLayout layout = new VerticalLayout();
-        layout.add("");
+        layout.add(""); // Muestra un espacio en la barra de tabs
 
-        // Label label = new Label("Nivel: Super Administrador"); // creo Label de nivel
-        // rol
-        // layout.add(label); // añado el Label al VerticalLayout
-        // layout.setAlignSelf(Alignment.CENTER, label); // centro el label en el Layout
-
-        Button rolInfoButton = new Button("Nivel: " + formatText("rol_superadmin"));
+        Button rolInfoButton = new Button(formatText("nivel") + ": " + formatText("rol_superadmin"));
         rolInfoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         layout.add(rolInfoButton); // añado el Label al VerticalLayout
         layout.setAlignSelf(Alignment.CENTER, rolInfoButton); // centro el label en el Layout
 
         addToDrawer(layout);
-
         // Muestra el menú Tabs
         addToDrawer(tabs);
     }

@@ -3,6 +3,7 @@ package com.example.application.data.idiomas;
 import java.io.IOException;
 import java.util.Properties;
 
+// Esta clase no la vamos a usar, pero muestra como podríamos implementar multi-idioma sin usar i18n
 public class Idioma extends Properties {
 
     Properties properties = new Properties();

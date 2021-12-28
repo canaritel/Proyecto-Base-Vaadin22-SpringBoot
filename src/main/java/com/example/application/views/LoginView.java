@@ -1,10 +1,8 @@
 package com.example.application.views;
 
-import java.nio.charset.Charset;
 import java.util.Locale;
 
 import com.example.application.Application;
-import com.example.application.data.idiomas.Idioma;
 import com.example.application.data.idiomas.PrintText;
 import com.example.application.data.idiomas.PrintText.Color;
 import com.vaadin.flow.component.Component;
@@ -30,7 +28,8 @@ import org.springframework.context.annotation.PropertySource;
 public class LoginView extends VerticalLayout implements BeforeEnterObserver, LocaleChangeObserver {
 
 	private LoginForm loginForm = new LoginForm(); // inicializamos_objeto_formulario_Login
-	private Idioma idioma = new Idioma(Application.lang_APP); // inicializamos_objeto_con_idioma_default
+	// private Idioma idioma = new Idioma(Application.lang_APP); //
+	// inicializamos_objeto_con_idioma_default
 	private final Locale LOCALE_ES = new Locale("es");
 	private final Locale LOCALE_EN = new Locale("en");
 
@@ -66,21 +65,21 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Lo
 		loginForm.setI18n(createI18n()); // creamos nuestro componente login personalizado a nuestro idioma
 		loginForm.addForgotPasswordListener(
 				event -> {
-					PrintText.imprime(formatearTexto("pendiente"), Color.GRIS);
+					PrintText.imprime(formatText("pendiente"), Color.GRIS);
 				});
 	}
 
 	private LoginI18n createI18n() {
 		final LoginI18n i18n = LoginI18n.createDefault();
 		i18n.setHeader(new LoginI18n.Header());
-		i18n.getForm().setTitle(formatearTexto("acceda"));
-		i18n.getForm().setSubmit(formatearTexto("entrar"));
-		i18n.getForm().setUsername(formatearTexto("usuario"));
-		i18n.getForm().setPassword(formatearTexto("clave"));
-		i18n.getForm().setForgotPassword(formatearTexto("recordar"));
-		i18n.getErrorMessage().setTitle(formatearTexto("error_titulo"));
-		i18n.getErrorMessage().setMessage(formatearTexto("error_texto"));
-		i18n.setAdditionalInformation(formatearTexto("info_acceso"));
+		i18n.getForm().setTitle(formatText("acceda"));
+		i18n.getForm().setSubmit(formatText("entrar"));
+		i18n.getForm().setUsername(formatText("usuario"));
+		i18n.getForm().setPassword(formatText("clave"));
+		i18n.getForm().setForgotPassword(formatText("recordar"));
+		i18n.getErrorMessage().setTitle(formatText("error_titulo"));
+		i18n.getErrorMessage().setMessage(formatText("error_texto"));
+		i18n.setAdditionalInformation(formatText("info_acceso"));
 
 		return i18n;
 	}
@@ -100,9 +99,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Lo
 
 		imgFlagSpain.addClickListener(e -> {
 			Application.locale_APP = LOCALE_ES; // nuevo método
-			idioma.setIdioma("Spain"); // seleccionamos objeto idioma de tipo Spain
-			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
-			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
+			// Notification.show(formatText("idioma")); // mostramo idioma seleccionado
+			PrintText.imprime(formatText("idioma_select"), Color.VERDE); // mostramos idioma seleccionado
 			Application.lang_APP = "Spain"; // idioma por defecto
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
 			idiomaDispositivo();
@@ -110,9 +108,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Lo
 
 		imgFlagUK.addClickListener(e -> {
 			Application.locale_APP = LOCALE_EN; // nuevo método
-			idioma.setIdioma("English"); // seleccionamos objeto idioma de tipo English
-			// Notification.show(formatearTexto("idioma")); // mostramo idioma seleccionado
-			PrintText.imprime(formatearTexto("idioma_select"), Color.VERDE);
+			PrintText.imprime(formatText("idioma_select"), Color.VERDE); // mostramos idioma seleccionado
 			Application.lang_APP = "English"; // idioma por defecto
 			loginForm.setI18n(createI18n()); // personalizamos con el idioma seleccionado
 			idiomaDispositivo();
@@ -128,9 +124,16 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Lo
 	}
 
 	// Este método permite acentos y tildes español de los campos traducidos
-	private String formatearTexto(String property) {
-		String texto_formateado = new String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
-		return texto_formateado;
+	// private String formatText(String property) {
+	// String texto_formateado = new
+	// String(idioma.getProperty(property).getBytes(Charset.forName("8859_1")));
+	// return texto_formateado;
+	// }
+
+	private String formatText(String property) {
+		// Este método devuelve el texto traducido.
+		// Advierte está "depreciado" pero lo vamos a continuar usando
+		return getTranslation(property, Application.locale_APP);
 	}
 
 	@Override

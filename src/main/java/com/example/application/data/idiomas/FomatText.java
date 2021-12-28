@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 
 import com.example.application.Application;
 
+// Este método no lo usamos. Pero es válido para sustituir el i18N
 public class FomatText {
 
     // Este método permite acentos y tildes español de los campos traducidos
