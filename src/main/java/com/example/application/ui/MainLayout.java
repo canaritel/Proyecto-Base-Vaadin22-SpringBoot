@@ -4,8 +4,6 @@ import java.util.Locale;
 
 import com.example.application.Application;
 import com.example.application.backend.security.SecurityService;
-import com.example.application.ui.components.FlexBoxLayout;
-import com.example.application.ui.utils.Overflow;
 import com.example.application.ui.views.cupones.CuponesView;
 import com.example.application.ui.views.estadistica.EstadisticaView;
 import com.example.application.ui.views.list.ListView;
@@ -31,7 +29,6 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
-import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexDirection;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -48,69 +45,47 @@ public class MainLayout extends AppLayout {
     private final Locale LOCALE_EN = new Locale("en");
     private Tabs tabs;
     private MenuBar menuSuperiorDerecha;
-    private FlexBoxLayout viewContainer;
-    private static final String CLASS_NAME = "root";
-    private FlexBoxLayout column;
-    private FlexBoxLayout row;
-    private VerticalLayout naviDrawer;
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
         createHeader();
         createDrawer(createTabs());
-        // initStructure();
+
     }
 
     private void createHeader() {
         // Diseño elementos barra superior
         // https://stackoverflow.com/questions/57553973/where-should-i-place-my-vaadin-10-static-files/57553974#57553974
         H2 textLogo = new H2("");
+        textLogo.getStyle().set("margin", "0");
         Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imgLogo, textLogo, menuSuperiorDerecha());
+        DrawerToggle toggle = new DrawerToggle();
+        HorizontalLayout header = new HorizontalLayout(toggle, imgLogo, textLogo, menuSuperiorDerecha());
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(textLogo);
         header.setWidth("100%");
-        header.addClassNames("py-0", "px-m");
+        // header.addClassName("header");
+        header.addClassNames("py-0", "px-m"); // margenes barra superior
         header.getThemeList().set("light", true);
 
         addToNavbar(header);
-    }
-
-    /**
-     * Initialise the required components and containers.
-     */
-    private void initStructure() {
-        naviDrawer = new VerticalLayout();
-
-        viewContainer = new FlexBoxLayout();
-        viewContainer.addClassName(CLASS_NAME + "__view-container");
-        viewContainer.setOverflow(Overflow.HIDDEN);
-
-        column = new FlexBoxLayout(viewContainer);
-        column.addClassName(CLASS_NAME + "__column");
-        column.setFlexDirection(FlexDirection.COLUMN);
-        column.setFlexGrow(1, viewContainer);
-        column.setOverflow(Overflow.HIDDEN);
-
-        row = new FlexBoxLayout(naviDrawer, column);
-        row.addClassName(CLASS_NAME + "__row");
-        row.setFlexGrow(1, column);
-        row.setOverflow(Overflow.HIDDEN);
-
-        naviDrawer.add(row);
-        naviDrawer.setFlexGrow(1, row);
+        setPrimarySection(Section.NAVBAR); // la barra índice del menú se situa fija superior izquierda
     }
 
     private Component menuSuperiorDerecha() {
         Div div = new Div();
 
         menuSuperiorDerecha = new MenuBar();
-        menuSuperiorDerecha.addThemeVariants(MenuBarVariant.LUMO_ICON, MenuBarVariant.LUMO_PRIMARY);
+        // menuSuperiorDerecha.addThemeVariants(MenuBarVariant.LUMO_ICON,
+        // MenuBarVariant.LUMO_PRIMARY);
+        menuSuperiorDerecha.addThemeVariants(MenuBarVariant.LUMO_ICON);
 
-        MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.COG_O));
+        // MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.COG_O));
+        MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.ELLIPSIS_DOTS_V)); // icono del menu superior
+                                                                                           // derecha
         SubMenu shareSubMenu = item.getSubMenu();
 
         MenuItem onColor = shareSubMenu.addItem(formatText("color"));
@@ -185,6 +160,7 @@ public class MainLayout extends AppLayout {
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.addThemeVariants(TabsVariant.MATERIAL_FIXED);
         // tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL); //elimino barra
+        // tabs.setClassName("header-main");
         tabs.setId("tabs");
 
         // Listado de iconos https://vaadin.com/components/vaadin-icons/java-examples
@@ -204,9 +180,10 @@ public class MainLayout extends AppLayout {
                 VaadinIcon.USER.create(), createMenuLink(RolView.class, formatText("rol")));
 
         Tab tab_listados = new Tab(
-                VaadinIcon.GAMEPAD.create(), createMenuLink(ListView.class, "List"));
+                VaadinIcon.GAMEPAD.create(), createMenuLink(ListView.class, "Listados"));
 
-        tabs.add(tab_zonasComerciales, tab_localesComerciales, tab_cupones, tab_estadisticas, tab_roles, tab_listados);
+        tabs.add(tab_listados, tab_zonasComerciales, tab_localesComerciales, tab_cupones, tab_estadisticas,
+                tab_roles);
 
         return tabs;
     }

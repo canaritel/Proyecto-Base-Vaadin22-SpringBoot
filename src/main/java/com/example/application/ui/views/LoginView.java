@@ -7,7 +7,7 @@ import com.example.application.backend.data.idiomas.PrintText;
 import com.example.application.backend.data.idiomas.PrintText.Color;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginI18n;
@@ -44,15 +44,18 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Lo
 		addClassName("login-rich-content");
 		crearLogin();
 		setSizeFull();
+
 		setAlignItems(Alignment.CENTER);
 		setJustifyContentMode(JustifyContentMode.CENTER);
+		addClassNames("py-0", "px-m");
 
 		Image imgLogo = new Image("/images/cuponcito_opt.png", "alt text");
 		imgLogo.setHeight("64px"); // ajustamos el tamaño de la imagen
 
 		loginForm.setAction("login"); // Set the LoginForm action to "login" to post the_login_form_to_Spring_Security
 
-		add(new H2(""), imgLogo, loginForm, personalizacionLogin());
+		add(new H4(""), imgLogo, loginForm, personalizacionLogin());
+
 	}
 
 	// Desarrollamos e implementamos el uso de i18n internacionalización

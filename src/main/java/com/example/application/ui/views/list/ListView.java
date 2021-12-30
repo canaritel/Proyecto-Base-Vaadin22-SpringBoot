@@ -18,9 +18,9 @@ import com.vaadin.flow.router.Route;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @Scope("prototype")
-@Route(value = "list", layout = MainLayout.class)
+@Route(value = "", layout = MainLayout.class)
 @PageTitle("Contacts | Vaadin CRM")
 @PermitAll
 public class ListView extends VerticalLayout {

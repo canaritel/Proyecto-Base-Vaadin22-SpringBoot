@@ -41,7 +41,7 @@ import org.vaadin.artur.helpers.LaunchUtil;
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 // @JsModule("@vaadin/vaadin-lumo-styles/badge")
 
-@PWA(name = "Cuponcito.com", shortName = "Coupon", iconPath = "images/logos/18.png", offlinePath = "offline.html", backgroundColor = "#233348", themeColor = "#233348", offlineResources = {
+@PWA(name = "Cuponcito.com", shortName = "Coupon", iconPath = "images/logos/17.png", offlinePath = "offline.html", backgroundColor = "#233348", themeColor = "#233348", offlineResources = {
         "./images/offline.png" }) // la carpeta de las imágenes está en META-INFs
 
 @SpringBootApplication
