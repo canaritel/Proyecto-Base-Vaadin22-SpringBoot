@@ -3,6 +3,7 @@ package com.example.application.ui;
 import java.util.Locale;
 
 import com.example.application.Application;
+import com.example.application.backend.notification.Notificacion;
 import com.example.application.backend.security.SecurityService;
 import com.example.application.ui.views.cupones.CuponesView;
 import com.example.application.ui.views.estadistica.EstadisticaView;
@@ -18,6 +19,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Hr;
@@ -38,6 +40,8 @@ import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.Lumo;
 
+@CssImport(value = "./styles/components/app-layout.css", themeFor = "vaadin-app-layout") // css para
+                                                                                         // ajustar_el_tamaño_del_drawer
 public class MainLayout extends AppLayout {
 
     private final SecurityService securityService;
@@ -45,6 +49,7 @@ public class MainLayout extends AppLayout {
     private final Locale LOCALE_EN = new Locale("en");
     private Tabs tabs;
     private MenuBar menuSuperiorDerecha;
+    private Notificacion notifica = new Notificacion(); // alarma y avisos
 
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
@@ -62,7 +67,8 @@ public class MainLayout extends AppLayout {
         imgLogo.setHeight("34px"); // ajustamos el tamaño de la imagen
 
         DrawerToggle toggle = new DrawerToggle();
-        HorizontalLayout header = new HorizontalLayout(toggle, imgLogo, textLogo, menuSuperiorDerecha());
+        HorizontalLayout header = new HorizontalLayout(toggle, imgLogo, textLogo,
+                notifica.avisos(formatText("aviso_demo")), menuSuperiorDerecha());
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(textLogo);
@@ -84,8 +90,7 @@ public class MainLayout extends AppLayout {
         menuSuperiorDerecha.addThemeVariants(MenuBarVariant.LUMO_ICON);
 
         // MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.COG_O));
-        MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.ELLIPSIS_DOTS_V)); // icono del menu superior
-                                                                                           // derecha
+        MenuItem item = menuSuperiorDerecha.addItem(new Icon(VaadinIcon.ELLIPSIS_DOTS_V)); // icono_del_menu_superior_derecha
         SubMenu shareSubMenu = item.getSubMenu();
 
         MenuItem onColor = shareSubMenu.addItem(formatText("color"));
@@ -143,8 +148,7 @@ public class MainLayout extends AppLayout {
 
     private void createDrawer(Tabs tabs) {
         VerticalLayout layout = new VerticalLayout();
-        layout.add(""); // Muestra un espacio en la barra de tabs
-
+        layout.setHeight("67px"); // Muestra un espacio en la barra de tabs
         Button rolInfoButton = new Button(formatText("nivel") + ": " + formatText("rol_superadmin"));
         rolInfoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         layout.add(rolInfoButton); // añado el Label al VerticalLayout
@@ -152,7 +156,7 @@ public class MainLayout extends AppLayout {
 
         addToDrawer(layout);
         // Muestra el menú Tabs
-        addToDrawer(tabs);
+        addToDrawer(new Hr(), tabs);
     }
 
     private Tabs createTabs() {
@@ -208,7 +212,7 @@ public class MainLayout extends AppLayout {
     private String formatText(String property) {
         // Este método devuelve el texto traducido.
         // Advierte está "depreciado" pero lo vamos a continuar usando
-        return getTranslation(property, Application.locale_APP);
+        return this.getTranslation(property, Application.locale_APP);
     }
 
 }

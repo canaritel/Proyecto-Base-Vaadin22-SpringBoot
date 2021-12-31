@@ -53,6 +53,7 @@ public class Application extends SpringBootServletInitializer implements AppShel
     public static String lang_default;// idoma_del_dispositivo_por_defecto
     public static String lang_APP = "Spain"; // donde guardamos el idioma seleccionado de la APP
     public static Locale locale_APP = new Locale("es");
+    public static int numero_avisos = 1;
 
     /*
      * ***** DECLARAMOS LOS VALORES Y PROPIEDADES PERSISTENCIA EN OBJECTDB ****
