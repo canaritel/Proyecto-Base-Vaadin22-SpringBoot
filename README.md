@@ -1,6 +1,7 @@
 # Spring Boot + Vaadin + SpringBot aplicación base + ObjectDB
 
-This repository contains the source code for the [Building Modern Web Applications With Spring Boot and Vaadin](https://vaadin.com/docs/latest/flow/tutorials/in-depth-course).
+This repository contiene el proyecto base para ser usado en cualquier aplicación basada en Spring Boot, junto a Vaadin Flow, y con la base de datos ObjectDB. La persistencia se realiza en JPA con ElcipseLink.
+Para este proyecto se ha creado la Persistencia mediante @Ben en la clase Application.java
 
 
 
@@ -9,6 +10,6 @@ This repository contains the source code for the [Building Modern Web Applicatio
 - The main branch contains the source code for the latest Vaadin release
 - The `v22` branch contains the source code for Vaadin 22 LTS
 
-## Text tutorial
+## Test
 
-You can find a text version of the tutorial in the [Vaadin Documentation](https://vaadin.com/docs/latest/flow/tutorials/in-depth-course).
+La clase creada test.java integra varios procesos hacia la BD ObjectDB.
