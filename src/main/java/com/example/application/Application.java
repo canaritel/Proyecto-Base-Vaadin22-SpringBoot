@@ -62,9 +62,9 @@ public class Application extends SpringBootServletInitializer implements AppShel
     @Bean(name = "entityManagerFactory")
     public EntityManagerFactory getEntityManagerFactoryBean() {
         return Persistence.createEntityManagerFactory(
-                "objectdb://91.121.134.199:6136/test-spring-jpa4.tmp;drop;user=tonii;password=gs21612161C");
-        // "objectdb:test-spring-jpa.tmp;drop;user=admin;password=admin");
-        // Las BD con extensión odb no se borrarán con "drop", si las "tmp"
+        // "objectdb://[tu IP al hosting de la BD]:[puerto]/[nombre_BD].tmp;drop;user=[nombre de acceso BD];password=[clave de acceso BD]");
+        "objectdb:test-spring-jpa.tmp;drop;user=admin;password=admin");
+        // Las BD con extensión .odb no se pueden borrar. Para pruebas usar extensión .tmp, puede borrarse con "drop" como parámetro en la conexión a la BD
     }
 
     @Bean
