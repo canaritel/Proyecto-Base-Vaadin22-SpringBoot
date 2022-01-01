@@ -1,7 +1,7 @@
 # Spring Boot + Vaadin + SpringBot aplicación base + ObjectDB
 
-This repository contiene el proyecto base para ser usado en cualquier aplicación basada en Spring Boot, junto a Vaadin Flow, y con la base de datos ObjectDB. La persistencia se realiza en JPA con ElcipseLink.
-Para este proyecto se ha creado la Persistencia mediante @Ben en la clase Application.java
+Este repositorio contiene el proyecto base para ser usado en cualquier aplicación basada en Spring Boot, junto a Vaadin Flow, y con la base de datos ObjectDB.
+La persistencia se realiza en JPA con ElcipseLink. Dicha persistencia se ha creado mediante la anotación @Bean en la clase Application.java
 
 
 
