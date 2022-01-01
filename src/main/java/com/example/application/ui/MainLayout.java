@@ -5,6 +5,9 @@ import java.util.Locale;
 import com.example.application.Application;
 import com.example.application.backend.notification.Notificacion;
 import com.example.application.backend.security.SecurityService;
+import com.example.application.ui.utils.LumoStyles;
+import com.example.application.ui.utils.UIUtils;
+import com.example.application.ui.utils.css.Shadow;
 import com.example.application.ui.views.cupones.CuponesView;
 import com.example.application.ui.views.estadistica.EstadisticaView;
 import com.example.application.ui.views.list.ListView;
@@ -40,8 +43,7 @@ import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-@CssImport(value = "./styles/components/app-layout.css", themeFor = "vaadin-app-layout") // css para
-                                                                                         // ajustar_el_tamaño_del_drawer
+@CssImport(value = "./styles/components/app-layout.css", themeFor = "vaadin-app-layout") // css_para_ajustar_el_tamaño_del_drawer
 public class MainLayout extends AppLayout {
 
     private final SecurityService securityService;
@@ -54,7 +56,7 @@ public class MainLayout extends AppLayout {
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
         createHeader();
-        createDrawer(createTabs());
+        createDrawer();
 
     }
 
@@ -79,6 +81,104 @@ public class MainLayout extends AppLayout {
 
         addToNavbar(header);
         setPrimarySection(Section.NAVBAR); // la barra índice del menú se situa fija superior izquierda
+    }
+
+    private void createDrawer() {
+        VerticalLayout layout = new VerticalLayout();
+        layout.setHeight("67px"); // Muestra un espacio en la barra de tabs
+        Button rolInfoButton = new Button(formatText("nivel") + ": " + formatText("rol_superadmin"));
+        rolInfoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
+        layout.add(rolInfoButton); // añado el Label al VerticalLayout
+        layout.setAlignSelf(Alignment.CENTER, rolInfoButton); // centro el label en el Layout
+
+        addToDrawer(layout);
+        // Muestra el menú Tabs
+        addToDrawer(new Hr(), createTabs());
+        // addToDrawer(createButtons());
+    }
+
+    private Component createButtons() {
+        // VerticalLayout div = new VerticalLayout();
+        Button home = UIUtils.createTertiaryButton(VaadinIcon.HOME);
+        Button clock = UIUtils.createTertiaryButton(VaadinIcon.CLOCK);
+        Button users = UIUtils.createTertiaryButton(VaadinIcon.USERS);
+        Button search = UIUtils.createTertiaryButton(VaadinIcon.SEARCH);
+        Button bell = UIUtils.createTertiaryButton(VaadinIcon.BELL);
+
+        // Set the width
+        for (Button button : new Button[] { home, clock, users, search, bell }) {
+            button.setWidth("20%");
+        }
+
+        VerticalLayout footer = new VerticalLayout(home, clock, users, search, bell);
+
+        // Set background color and shadow
+        UIUtils.setBackgroundColor(LumoStyles.Color.BASE_COLOR, footer);
+        UIUtils.setShadow(Shadow.M, footer);
+
+        // div.add(footer);
+        return footer;
+    }
+
+    private Tabs createTabs() {
+        tabs = new Tabs();
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        tabs.addThemeVariants(TabsVariant.MATERIAL_FIXED);
+        // tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL); //elimino barra
+        // tabs.setClassName("header-main");
+        tabs.setId("tabs");
+
+        // Listado de iconos https://vaadin.com/components/vaadin-icons/java-examples
+        Tab tab_zonasComerciales = new Tab(
+                VaadinIcon.HOSPITAL.create(), createMenuLink(ZonaComercialView.class, formatText("zona_comercial")));
+
+        Tab tab_localesComerciales = new Tab(
+                VaadinIcon.SHOP.create(), createMenuLink(LocalComercialView.class, formatText("zona_tienda")));
+
+        Tab tab_cupones = new Tab(
+                VaadinIcon.GIFT.create(), createMenuLink(CuponesView.class, formatText("cupon")));
+
+        Tab tab_estadisticas = new Tab(
+                VaadinIcon.BAR_CHART.create(), createMenuLink(EstadisticaView.class, formatText("estadistica")));
+
+        Tab tab_roles = new Tab(
+                VaadinIcon.USER.create(), createMenuLink(RolView.class, formatText("rol")));
+
+        Tab tab_listados = new Tab(
+                VaadinIcon.GAMEPAD.create(), createMenuLink(ListView.class, "Listados"));
+
+        tabs.add(tab_listados, tab_zonasComerciales, tab_localesComerciales, tab_cupones, tab_estadisticas,
+                tab_roles);
+
+        return tabs;
+    }
+
+    private RouterLink createMenuLink(Class<? extends Component> viewClass, String caption) {
+        final RouterLink routerLink = new RouterLink(null, viewClass);
+        routerLink.setClassName("menu-link");
+        routerLink.add(new Span(caption));
+
+        return routerLink;
+    }
+
+    private Button createMenuButton(String caption, Icon icon) {
+        final Button routerButton = new Button(caption);
+        routerButton.setClassName("menu-button");
+        routerButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+        routerButton.setIcon(icon);
+        icon.setSize("24px");
+        return routerButton;
+    }
+
+    private String formatText(String property) {
+        // Este método devuelve el texto traducido.
+        // Advierte está "depreciado" pero lo vamos a continuar usando
+        return this.getTranslation(property, Application.locale_APP);
+    }
+
+    private void cambioIdioma(Locale locale) {
+        Application.locale_APP = locale;
+        UI.getCurrent().getPage().reload();
     }
 
     private Component menuSuperiorDerecha() {
@@ -139,80 +239,6 @@ public class MainLayout extends AppLayout {
         div.add(menuSuperiorDerecha);
 
         return div;
-    }
-
-    private void cambioIdioma(Locale locale) {
-        Application.locale_APP = locale;
-        UI.getCurrent().getPage().reload();
-    }
-
-    private void createDrawer(Tabs tabs) {
-        VerticalLayout layout = new VerticalLayout();
-        layout.setHeight("67px"); // Muestra un espacio en la barra de tabs
-        Button rolInfoButton = new Button(formatText("nivel") + ": " + formatText("rol_superadmin"));
-        rolInfoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
-        layout.add(rolInfoButton); // añado el Label al VerticalLayout
-        layout.setAlignSelf(Alignment.CENTER, rolInfoButton); // centro el label en el Layout
-
-        addToDrawer(layout);
-        // Muestra el menú Tabs
-        addToDrawer(new Hr(), tabs);
-    }
-
-    private Tabs createTabs() {
-        tabs = new Tabs();
-        tabs.setOrientation(Tabs.Orientation.VERTICAL);
-        tabs.addThemeVariants(TabsVariant.MATERIAL_FIXED);
-        // tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL); //elimino barra
-        // tabs.setClassName("header-main");
-        tabs.setId("tabs");
-
-        // Listado de iconos https://vaadin.com/components/vaadin-icons/java-examples
-        Tab tab_zonasComerciales = new Tab(
-                VaadinIcon.HOSPITAL.create(), createMenuLink(ZonaComercialView.class, formatText("zona_comercial")));
-
-        Tab tab_localesComerciales = new Tab(
-                VaadinIcon.SHOP.create(), createMenuLink(LocalComercialView.class, formatText("zona_tienda")));
-
-        Tab tab_cupones = new Tab(
-                VaadinIcon.GIFT.create(), createMenuLink(CuponesView.class, formatText("cupon")));
-
-        Tab tab_estadisticas = new Tab(
-                VaadinIcon.BAR_CHART.create(), createMenuLink(EstadisticaView.class, formatText("estadistica")));
-
-        Tab tab_roles = new Tab(
-                VaadinIcon.USER.create(), createMenuLink(RolView.class, formatText("rol")));
-
-        Tab tab_listados = new Tab(
-                VaadinIcon.GAMEPAD.create(), createMenuLink(ListView.class, "Listados"));
-
-        tabs.add(tab_listados, tab_zonasComerciales, tab_localesComerciales, tab_cupones, tab_estadisticas,
-                tab_roles);
-
-        return tabs;
-    }
-
-    private RouterLink createMenuLink(Class<? extends Component> viewClass, String caption) {
-        final RouterLink routerLink = new RouterLink(null, viewClass);
-        routerLink.setClassName("menu-link");
-        routerLink.add(new Span(caption));
-
-        return routerLink;
-    }
-
-    private Button createMenuButton(String caption, Icon icon) {
-        final Button routerButton = new Button(caption);
-        routerButton.setClassName("menu-button");
-        routerButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-        routerButton.setIcon(icon);
-        icon.setSize("24px");
-        return routerButton;
-    }
-
-    private String formatText(String property) {
-        // Este método devuelve el texto traducido.
-        // Advierte está "depreciado" pero lo vamos a continuar usando
-        return this.getTranslation(property, Application.locale_APP);
     }
 
 }

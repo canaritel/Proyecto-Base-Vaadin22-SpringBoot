@@ -16,7 +16,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 //@Component
 @Scope("prototype")
